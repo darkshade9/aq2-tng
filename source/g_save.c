@@ -541,6 +541,7 @@ void InitGame( void )
 
 	use_mvd2 = gi.cvar( "use_mvd2", "0", 0 );	// JBravo: q2pro MVD2 recording. 0 = off, 1 = on
 
+<<<<<<< HEAD
 #ifndef NO_BOTS
 	// bots
 	ltk_jumpy = gi.cvar( "ltk_jumpy", "1", CVAR_SERVERINFO );
@@ -549,6 +550,9 @@ void InitGame( void )
 	ltk_chat = gi.cvar( "ltk_chat", "1", 0 );
 	ltk_routing = gi.cvar( "ltk_routing", "0", 0 );
 #endif
+=======
+	e_enhancedSlippers = gi.cvar( "e_enhancedSlippers", "0", 0); // darksaint: AQ2 ETE
+>>>>>>> Added e_enhancedSlippers, first run
 
 	// items
 	InitItems();
