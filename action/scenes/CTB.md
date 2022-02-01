@@ -24,11 +24,11 @@ This is CTF, but with briefcases, and a few twists.  One unique aspect of this i
 
 ### TARGETS
 * `TARGET_AREA` are areas on the map that pertain to objectives in this scenario, in this case, they are capture points and briefcase locations
-* `MODEL` reference to a model file to help players determine where a `TARGET_AREA` is
+    * `MODEL` reference to a model file to help players determine where a `TARGET_AREA` is
 * `TARGET_OBJECT` are objects that pertain to this scenario, in this case, they are briefcases
-* `MODEL` reference to a model file of the briefcase
-* `PIC` reference to a pic file that skins the `VWEP`
-* `VWEP` reference to the model that is skinned by `PIC`
+    * `MODEL` reference to a model file of the briefcase
+    * `PIC` reference to a pic file that skins the `VWEP`
+    * `VWEP` reference to the model that is skinned by `PIC`
     * Note: Not sure why there's a reference of the filename in `VWEP` when it's defined in `MODEL`?
 
 
