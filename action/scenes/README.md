@@ -32,6 +32,63 @@
         * `wp_flags` - Weapon loadouts are managed by the scene, not a dmflag
         * `itm_flags` - Item loadouts are managed by the scene, not a dmflag
 
+
+## Message formatting (centered text)
+### Minimum 1 player on each team
+```
+The round will begin in 20 seconds!
+```
+
+### Not enough players, and
+### Volunteer needed (`e_mustVolunteer = 1` and no one used the `volunteer` command) 
+```
+Not enough active players on
+team_1_name
+to select
+team_1_target_name
+Someone needs to type 'volunteer'
+in the console
+```
+
+### Round begin:
+ETV:
+```
+team_1_name must:
+assassinate team_2_target_name (actual_player_name)
+
+team_2_name must:
+escort team_2_target_name (actual_player_name) safely to 
+target_area
+```
+
+CTB:
+```
+team_1_name must:
+retrieve target_object_1 from target_area_2 and
+bring it to target_area_1
+
+team_2_name must:
+retrieve target_object_2 from target_area_1 and
+bring it to target_area_2
+```
+
+## Kill messaging:
+* Killing a Leader
+    * Player log:
+        * `You get 10 bonus points for eliminating enemy_target_name`
+    * Console log:
+        * `player_name gets 10 bonus points for eliminating enemy_target_name`
+* Within X amount of distance from Leader, or Leader yourself:
+    * Player log:
+        * `You get 3 bonus points for defending leader_name`
+    * Console log:
+        * `player_name gets 3 bonus points for defending leader_name`
+* Alive when the round ends:
+    * Player log:
+        * `You get 10 bonus points for surviving the round`
+    * No console log(?) since this can be a single player or an array of players
+
+
 ---
 
 ## Notes/Ideas/Improvements
@@ -39,6 +96,7 @@
 ### Notes
 * ETE did not have a Kevlar Helmet, we would need to add support in the scene files for this item
 * All values with spaces must be surrounded with double quotes, though it's usually just a good idea to do it for all values except for integers
+* Currently there's a pretty bad bug with loading scenarios and the use of `gamemap` -- ETE was designed before `gamemap` functionality was a thing, it relies on the old `map` functionality to load in the scenario.  Using `gamemap` to go to the next map breaks this and scenarios will default to the first one loaded when the server started.
 
 ### Ideas
 
