@@ -51,10 +51,10 @@ Example: `PLAYER_RANDOM "Ramone" TEAM "The Rojos" SKIN "male/nut" WEAPONS + SILE
 * `TARGET_LOCATION` defines the area that the briefcase must be picked up from
 * `TARGET_AREA` defines the area that the briefcase must be delivered to
 * `TARGET_OBJECT` defines the object that the carrier must retrieve
-    * `MODEL` reference to a model file of the briefcase
+    * `MODEL` reference to a model file of the briefcase at its spawn area
     * `PIC` reference to a pic file that skins the `VWEP`
-    * `VWEP` reference to the model that is skinned by `PIC`
-    * Note: Not sure why there's a reference of the filename in `VWEP` when it's defined in `MODEL`?
+    * `VWEP` reference to the model that is skinned by `PIC` while being held by the carrier
+
 
 `TEAM` field sets the values for the other team members that are not leaders
 * `SKIN` "model/skin"

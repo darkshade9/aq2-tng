@@ -48,7 +48,7 @@ If the defending team kills the escorting team's Leader, the escorting team all 
 * +/- delimited list of available items to choose from
 
 * `TARGET_AREA` creates a squared area between two points on the map (use viewpos to get coordinates)
-* `MODEL` optional model to load at this `TARGET_AREA` -- helpful for players to 'see' where they need to go for an important area
+    * `MODEL` optional model to load at this `TARGET_AREA` -- helpful for players to 'see' where they need to go for an important area
 
 
 Example: `PLAYER_RANDOM "Cyrus" TEAM "Robbers" SKIN "male/siris" WEAPONS + SILENCER + SLIPPERS + BANDOLIER + VEST + LASER`
