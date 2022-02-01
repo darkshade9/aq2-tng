@@ -10,8 +10,29 @@
 
 * `scene`: An indivdual file containing `scenarios`
 * `scenario`: A set of rules on goals, teams and targets
+* `continuous`: A scene that has `CONTINUOUS` enabled means that the round does not end when a team point is made, such as capturing a briefcase or holding a capture point.  This keeps the game moving as one continuous round until a timelimit, fraglimit or roundlimit is reached, and the next map loads.
 
-View scene files to get an understanding of the format
+## Espionage-specific settings requirements
+
+* `scripts <0|1>` - enables Espionage mode and performs the following:
+    * Enforces:
+        * `teamplay 1`
+        * `deathmatch 1`
+        * `use_3teams 0` - There is no 3 team Espionage support (yet?)
+        * `use_tourney 0` - Disables tournament mode (may revisit for Espionage Tournament Edition?)
+        * `use_matchmode 0` - Disables matchmode (may revisit for Espionage Tournament Edition?)
+        * `spawnProtect 0` - This is a DM-only feature
+    * Requires:
+        * `e_maxVolunteers <0|1>` - defaults to 0
+        * `e_mustVolunteer <0|1>` - defaults to 0
+        * `e_useDefaultScenario <0|1|2|3>` - defaults to 0
+        * `e_defaultScenarioName ""` - defaults to "Assassinate The Leader"
+        * `e_carrierReturn <0|1>` - defaults to 1
+    * Ignores:
+        * `wp_flags` - Weapon loadouts are managed by the scene, not a dmflag
+        * `itm_flags` - Item loadouts are managed by the scene, not a dmflag
+
+---
 
 ## Notes/Ideas/Improvements
 
@@ -27,7 +48,7 @@ View scene files to get an understanding of the format
         * Killing an enemy or enemy Leader
         * Retrieving a briefcase
         * Capturing a briefcase
-        * Reaching an escort point
+        * Reaching an escort point as the Leader
         * Killing an enemy crewmember within X distance from Leader (harassing the bodyguard)
         * Capturing a capturepoint
         * Holding a capturepoint over an interval
