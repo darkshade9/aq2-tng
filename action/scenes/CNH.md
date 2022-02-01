@@ -30,6 +30,7 @@ In this scenario type, your team must capture an area and hold it.  As long as y
 ---
 
 ## Parts of the Scene file
+`CONTINUOUS` field sets the action for the entire scenario to 'continuous play', as in when a Team Point is scored, it doesn't end the round, but the play continues.  Without `CONTINOUS`, when a Team Point is scored (such as holding a capture point for 30 seconds), the round wound end, players would despawn/respawn in a new round like standard Teamplay.
 
 `SCENARIO` field in the scene file determines the name of the scenario, this is unique among all scenes loaded into memory, so it can be referenced directly
 
@@ -71,4 +72,3 @@ Location (choose one):
 * The team only scores if _ALL_ capture points are held by the same team for the interval given
     * Example `GOALS` that would need to be held at once for 60 seconds
     * `HOLDALL "Hondo Arms Hotel" 60 "Lobby" "Room 101" "Room 102" "Room 201" "Room 202" "Roof Top"`
-* All values with spaces must be surrounded with double quotes, though it's usually just a good idea to do it for all values except for integers
