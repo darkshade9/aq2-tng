@@ -21,13 +21,15 @@ If the defending team kills the escorting team's Leader, the escorting team all 
 #### Defending team:
 * Killing the enemy leader
     * 1 Team point
-    * 10 points for the player who killed the Leader
+    * 10 points to the killer
     * 1 point for every member of the defending team
 * Killing escorting team members
     * 1 point each
+* Killing crew members within an area near the Leader (harassing defenders/bodyguards)
+    * 1 point
 
 #### Escorting team:
-* Team Leader touches the target_area
+* Team Leader touches the `TARGET_AREA`
     * 1 Team point
     * 10 points for the Leader
     * 1 point for every member of the escorting team
@@ -42,10 +44,12 @@ If the defending team kills the escorting team's Leader, the escorting team all 
 
 `TARGETS` are the objectives in this scenario, in this case, they are the defined points on the map that are referenced in other areas of the scenario file, and the information about the escorting team's Leader
 * `PLAYER_RANDOM` "LeaderName" (`PLAYER_RANDOM` defaults to random player unless `e_mustVolunteer` is `1`)
-* `TEAM` "TeamName" 
-* `SKIN` "model/skin" 
-* `WEAPONS` mean all weapons are enabled 
-* +/- delimited list of available items to choose from
+    * `TEAM` "TeamName" 
+    * `SKIN` "model/skin" 
+    * `WEAPONS` mean all weapons are enabled 
+    * +/- delimited list of available items to choose from
+        * `+` means available to choose
+        * `-` means unable to choose
 
 * `TARGET_AREA` creates a squared area between two points on the map (use viewpos to get coordinates)
     * `MODEL` optional model to load at this `TARGET_AREA` -- helpful for players to 'see' where they need to go for an important area
@@ -64,16 +68,16 @@ Defines a team named "Robbers", led by "Cyris", whose skin is "male/siris", has 
 
 `RESPAWN` options:
 
-* Time (choose one):
-    * INSTANT (instant respawn upon death)
-    * TIME [time] (wait [time] until respawn after death)
-    * FRACTION [percent] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
+Time (choose one):
+* `INSTANT` (instant respawn upon death)
+* `TIME` [`time`] (wait [time] until respawn after death)
+* `FRACTION` [`percent`] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
 Example: FRACTION 25 would mean you would only respawn if 25 percent of your players remain
-    * PERIODIC [time] (respawn every [time] seconds)
+* `PERIODIC` [`time`] (respawn every [time] seconds)
 
-* Location (choose one):
-    * INITIAL_SPAWN (always spawn at the original spawn point)
-    * AWAY_FROM [target_name] [spawn_spots] (spawn [spawn_spots] away from the [target_name]
+Location (choose one):
+* `INITIAL_SPAWN` (always spawn at the original spawn point)
+* `AWAY_FROM` [`target_name`] [`spawn_spots`] (spawn [`spawn_spots`] away from the [`target_name`]
 
 `GOALS` option:
 * ASSASSINATE (kill the player defined as the target)

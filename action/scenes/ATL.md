@@ -13,8 +13,14 @@ This is probably the easiest game mode to explain that deviates the least from s
 
 ### Scoring:
 
-* Killing the enemy leader: 10 personal points and 1 team point
-* Killing crew members: 1 point
+* Killing the enemy leader
+    * 10 points to the killer
+    * 1 team point
+    * 1 point for every member of the winning team
+* Killing crew members
+    * 1 point
+* Killing crew members within an area near the Leader (harassing defenders/bodyguards)
+    * 1 point
 
 ---
 
@@ -35,22 +41,25 @@ Defines a team named "The Rojos", led by "Ramone", whose skin is "male/nut", has
 
 `TEAM` field sets the values for the other team members that are not leaders
 * `SKIN` "model/skin"
-* `WEAPONS` "all"
+* `WEAPONS` mean all weapons are enabled 
+    * +/- delimited list of available items to choose from
+    * `+` means available to choose
+    * `-` means unable to choose
 * `RESPAWN` multiple parameters
 * `GOALS` assassinate other team's leader
 
 `RESPAWN` options:
 
 Time (choose one):
-* INSTANT (instant respawn upon death)
-* TIME [time] (wait [time] until respawn after death)
-* FRACTION [percent] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
+* `INSTANT` (instant respawn upon death)
+* `TIME` [`time`] (wait [time] until respawn after death)
+* `FRACTION` [`percent`] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
 Example: FRACTION 25 would mean you would only respawn if 25 percent of your players remain
-* PERIODIC [time] (respawn every [time] seconds)
+* `PERIODIC` [`time`] (respawn every [time] seconds)
 
 Location (choose one):
-* INITIAL_SPAWN (always spawn at the original spawn point)
-* AWAY_FROM [target_name] [spawn_spots] (spawn [spawn_spots] away from the [target_name]
+* `INITIAL_SPAWN` (always spawn at the original spawn point)
+* `AWAY_FROM` [`target_name`] [`spawn_spots`] (spawn [`spawn_spots`] away from the [`target_name`]
 
 `GOALS` option:
 * ASSASSINATE (kill the player defined as the target)

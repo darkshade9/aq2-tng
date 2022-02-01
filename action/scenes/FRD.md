@@ -65,15 +65,15 @@ Example: `PLAYER_RANDOM "Ramone" TEAM "The Rojos" SKIN "male/nut" WEAPONS + SILE
 `RESPAWN` options:
 
 Time (choose one):
-* INSTANT (instant respawn upon death)
-* TIME [time] (wait [time] until respawn after death)
-* FRACTION [percent] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
+* `INSTANT` (instant respawn upon death)
+* `TIME` [`time`] (wait [time] until respawn after death)
+* `FRACTION` [`percent`] (will only respawn once the remaining amount of live players on the team reaches this percentage)  
 Example: FRACTION 25 would mean you would only respawn if 25 percent of your players remain
-* PERIODIC [time] (respawn every [time] seconds)
+* `PERIODIC` [`time`] (respawn every [time] seconds)
 
 Location (choose one):
-* INITIAL_SPAWN (always spawn at the original spawn point)
-* AWAY_FROM [target_name] [spawn_spots] (spawn [spawn_spots] away from the [target_name]
+* `INITIAL_SPAWN` (always spawn at the original spawn point)
+* `AWAY_FROM` [`target_name`] [`spawn_spots`] (spawn [`spawn_spots`] away from the [`target_name`]
 
 `GOALS` option:
 * ASSASSINATE (kill the player defined as the target)

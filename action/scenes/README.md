@@ -11,3 +11,4 @@
 * `scene`: An indivdual file containing `scenarios`
 * `scenario`: A set of rules on goals, teams and targets
 
+View scene files to get an understanding of the format
