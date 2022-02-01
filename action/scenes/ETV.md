@@ -60,7 +60,7 @@ Defines a team named "Robbers", led by "Cyris", whose skin is "male/siris", has 
 * `SKIN` "model/skin"
 * `WEAPONS` "all"
 * `RESPAWN` multiple parameters
-* `GOALS` assassinate other team's leader
+* `GOALS` assassinate escorting team's leader and escorting team reach target_area
 
 `RESPAWN` options:
 
