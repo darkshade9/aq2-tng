@@ -33,7 +33,7 @@
         * `itm_flags` - Item loadouts are managed by the scene, not a dmflag
 
 
-## Message formatting (centered text)
+## Message formatting (`CenterPrintAll`)
 ### Minimum 1 player on each team
 ```
 The round will begin in 20 seconds!
