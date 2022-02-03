@@ -459,8 +459,11 @@ cvar_t *spectator_hud;
 
 cvar_t *jump;			// jumping mod
 
-// AQ2 ETE Add
+// darksaint - AQ2 ETE
 cvar_t *e_enhancedSlippers;
+
+// darksaint - Enhancements
+cvar_t *enhanced_stealth;
 
 void SpawnEntities (char *mapname, char *entities, char *spawnpoint);
 void ClientThink (edict_t * ent, usercmd_t * cmd);

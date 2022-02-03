@@ -1103,8 +1103,11 @@ extern cvar_t *bholelimit;
 extern cvar_t *splatlife;
 extern cvar_t *bholelife;
 
-// AQ2 ETE
+// darksaint - AQ2 ETE
 extern cvar_t *e_enhancedSlippers;
+
+// darksaint - Enhancements
+extern cvar_t *enhanced_stealth;
 
 #define world   (&g_edicts[0])
 

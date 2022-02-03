@@ -560,16 +560,32 @@ void SelectItem2(edict_t *ent, pmenu_t *p)
 
 void SelectItem3(edict_t *ent, pmenu_t *p)
 {
-	ent->client->pers.chosenItem = GET_ITEM(SLIP_NUM);
-	PMenu_Close(ent);
-	unicastSound(ent, gi.soundindex("misc/veston.wav"), 1.0);
+	if (enhanced_stealth->value == 1) {
+		{
+			ent->client->pers.chosenItem = GET_ITEM(SLIP_NUM);
+			PMenu_Close(ent);
+			unicastSound(ent, gi.soundindex("misc/veston.wav"), 1.0);
+		}
+		{
+			ent->client->pers.chosenItem = GET_ITEM(SIL_NUM);
+			PMenu_Close(ent);
+			unicastSound(ent, gi.soundindex("misc/screw.wav"), 1.0);
+		}
+		
+	}
 }
 
 void SelectItem4(edict_t *ent, pmenu_t *p)
 {
-	ent->client->pers.chosenItem = GET_ITEM(SIL_NUM);
-	PMenu_Close(ent);
-	unicastSound(ent, gi.soundindex("misc/screw.wav"), 1.0);
+	if (enhanced_stealth->value == 1) {
+		return;
+	}
+	else
+	{
+		ent->client->pers.chosenItem = GET_ITEM(SIL_NUM);
+		PMenu_Close(ent);
+		unicastSound(ent, gi.soundindex("misc/screw.wav"), 1.0);
+	}
 }
 
 void SelectItem5(edict_t *ent, pmenu_t *p)
@@ -635,7 +651,7 @@ void QuakeNigguhz (edict_t * ent, pmenu_t * p)
 // AQ2:TNG Deathwatch - Editing all menus to show the correct credits, version, names, locations, urls, etc
 pmenu_t creditsmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"žžžžžžžžžžžžžžžžžžžžžžžžžŸ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"*Design Team", PMENU_ALIGN_LEFT, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   {"Deathwatch", PMENU_ALIGN_LEFT, NULL, DoAGoodie},
@@ -665,7 +681,7 @@ pmenu_t creditsmenu[] = {
 
 pmenu_t weapmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"žžžžžžžžžžžžžžžžžžžžžžžžžŸ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Weapon", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG - Igor adding wp_flags
@@ -692,7 +708,7 @@ pmenu_t weapmenu[] = {
 
 pmenu_t itemmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"žžžžžžžžžžžžžžžžžžžžžžžžžŸ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Item", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG Igor adding itm_flags
@@ -721,7 +737,7 @@ void VotingMenu (edict_t * ent, pmenu_t * p)
 
 pmenu_t joinmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"žžžžžžžžžžžžžžžžžžžžžžžžžŸ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* lvl name */ , PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* team 1 */ , PMENU_ALIGN_LEFT, NULL, JoinTeam1},
@@ -2829,16 +2845,16 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			((s2f & SCORES2_ACC)    ? " Acc"    : "")
 		);
 		sprintf( string + strlen(string),
-			"yv 40 string2 \"%sžžžžžžžžžžžžžŸ%s%s%s%s%s%s%s%s\" ",
-			((s2f & SCORES2_TEAM)   ? "žžŸ "   : ""),
-			((s2f & SCORES2_TIME)   ? " žžŸ"   : ""),
-			((s2f & SCORES2_PING)   ? " žžŸ"   : ""),
-			((s2f & SCORES2_CAPS)   ? " žžŸ"   : ""),
-			((s2f & SCORES2_SCORE)  ? " žžžŸ"  : ""),
-			((s2f & SCORES2_KILLS)  ? " žžžŸ"  : ""),
-			((s2f & SCORES2_DEATHS) ? " žžžžŸ" : ""),
-			((s2f & SCORES2_DAMAGE) ? " žžžžŸ" : ""),
-			((s2f & SCORES2_ACC)    ? " žŸ"   : "")
+			"yv 40 string2 \"%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s%s%s%s%s%s%s%s\" ",
+			((s2f & SCORES2_TEAM)   ? "ï¿½ï¿½ï¿½ï¿½ "   : ""),
+			((s2f & SCORES2_TIME)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_PING)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_CAPS)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_SCORE)  ? " ï¿½ï¿½ï¿½ï¿½ï¿½"  : ""),
+			((s2f & SCORES2_KILLS)  ? " ï¿½ï¿½ï¿½ï¿½ï¿½"  : ""),
+			((s2f & SCORES2_DEATHS) ? " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : ""),
+			((s2f & SCORES2_DAMAGE) ? " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : ""),
+			((s2f & SCORES2_ACC)    ? " ï¿½ï¿½ï¿½"   : "")
 		);
 
 		line_y = 48;
