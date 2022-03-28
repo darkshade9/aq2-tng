@@ -723,7 +723,7 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 		// AQ2 Heroes
 		if (use_heroes->value) { //ESJ no limp for heroes
 			!(targ->client->resp.team == 1);
-			return;
+			return 0;
 		}
 		else
 		// AQ2 Heroes end

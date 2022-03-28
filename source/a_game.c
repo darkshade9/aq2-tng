@@ -180,7 +180,7 @@ void ReadSceneFile() //ESJ based on ReadConfigFile
     FILE *scene_file;
     char buf[MAX_STR_LEN];
     char reading_section[MAX_STR_LEN];
-	char scenepath[MAX_STR_LEN];
+	//char scenepath[MAX_STR_LEN];
 	char hero_inipath[MAX_STR_LEN];
     int lines_into_section = -1;
 	cvar_t *hero_ininame;
