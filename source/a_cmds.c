@@ -305,12 +305,20 @@ void Cmd_Reload_f(edict_t * ent)
 		    ((ent->client->inventory[ent->client->ammo_index] - 1) > 0)) {
 			// don't let them start fast reloading until far enough into the firing sequence
 			// this gives them a chance to break off from reloading to fire the weapon - zucc
+			
+			// ESJ - Heroes addition by darksaint
+			if (use_heroes->value == 1 && ent->client->resp.team == 2){
+				(ent->client->inventory[ent->client->ammo_index])--;
+			}
+			// ESJ End
+
 			if (ent->client->ps.gunframe >= 48) {
 				ent->client->fast_reload = 1;
 				(ent->client->inventory[ent->client->ammo_index])--;
 			} else {
 				ent->client->reload_attempts++;
 			}
+			
 		}
 		break;
 	case HC_NUM:
@@ -348,6 +356,12 @@ void Cmd_Reload_f(edict_t * ent)
 		    && ((ent->client->inventory[ent->client->ammo_index] - 1) > 0)) {
 			// don't let them start fast reloading until far enough into the firing sequence
 			// this gives them a chance to break off from reloading to fire the weapon - zucc
+			
+			// ESJ - Heroes addition by darksaint
+			if (use_heroes->value == 1 && ent->client->resp.team == 2){
+				(ent->client->inventory[ent->client->ammo_index])--;
+			}
+			
 			if (ent->client->ps.gunframe >= 72) {
 				ent->client->fast_reload = 1;
 				(ent->client->inventory[ent->client->ammo_index])--;

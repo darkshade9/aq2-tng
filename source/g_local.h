@@ -1106,6 +1106,10 @@ extern cvar_t *bholelife;
 // AQ2 ETE
 extern cvar_t *e_enhancedSlippers;
 
+// AQ2 Heroes
+extern cvar_t *use_heroes;
+extern cvar_t *heroweapon;
+
 #define world   (&g_edicts[0])
 
 // item spawnflags

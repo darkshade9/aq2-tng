@@ -467,7 +467,13 @@ void JoinTeamAuto (edict_t * ent, pmenu_t * p)
 
 void JoinTeam1 (edict_t * ent, pmenu_t * p)
 {
-	JoinTeam(ent, TEAM1, 0);
+	// AQ2 Heroes
+	if (use_heroes->value == 0) {
+		JoinTeam(ent, TEAM1, 0);
+	} else {
+		JoinTeam(ent, TEAM2, 0);
+	}
+	// AQ2 Heroes end
 }
 
 void JoinTeam2 (edict_t * ent, pmenu_t * p)
@@ -635,7 +641,7 @@ void QuakeNigguhz (edict_t * ent, pmenu_t * p)
 // AQ2:TNG Deathwatch - Editing all menus to show the correct credits, version, names, locations, urls, etc
 pmenu_t creditsmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"Ÿ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"*Design Team", PMENU_ALIGN_LEFT, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   {"Deathwatch", PMENU_ALIGN_LEFT, NULL, DoAGoodie},
@@ -665,7 +671,7 @@ pmenu_t creditsmenu[] = {
 
 pmenu_t weapmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"Ÿ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Weapon", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG - Igor adding wp_flags
@@ -692,7 +698,7 @@ pmenu_t weapmenu[] = {
 
 pmenu_t itemmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"Ÿ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Item", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG Igor adding itm_flags
@@ -721,7 +727,7 @@ void VotingMenu (edict_t * ent, pmenu_t * p)
 
 pmenu_t joinmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"Ÿ", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* lvl name */ , PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* team 1 */ , PMENU_ALIGN_LEFT, NULL, JoinTeam1},
@@ -907,6 +913,13 @@ void Team_f (edict_t * ent)
 	int desired_team = NOTEAM;
 	char team[24];
 
+	// AQ2 Heroes
+	if (use_heroes->value == 1) {
+			gi.centerprintf(ent, PRINT_HIGH, "You can't change teams in Heroes!");
+        return;
+	}
+	// // AQ2 Heroes End
+	
 	if (!teamplay->value)
 		return;
 
@@ -1246,7 +1259,14 @@ void UpdateJoinMenu( void )
 			num3++;
 	}
 
-	sprintf (team1players, "  (%d players)", num1);
+	// AQ2 Heroes
+	if (use_heroes->value == 1) {
+		sprintf(team1players, ""); //AQ2 Heroes: ESJ Don't display # of players
+	} else {
+		sprintf (team1players, "  (%d players)", num1);
+	}
+	// AQ2 Heroes end
+
 	sprintf (team2players, "  (%d players)", num2);
 	sprintf (team3players, "  (%d players)", num3);
 
@@ -2064,7 +2084,11 @@ int CheckTeamRules (void)
 		}
 		if(team_round_countdown == 41 && !matchmode->value)
 		{
-			while(CheckForUnevenTeams(NULL));
+			// AQ2 Heroes
+			if (use_heroes->value == 0) {
+				while(CheckForUnevenTeams(NULL));
+			}
+			// AQ2 Heroes end
 		}
 	}
 
@@ -2174,7 +2198,12 @@ int CheckTeamRules (void)
 				MakeAllLivePlayersObservers();
 
 				/* try to restart the game */
-				while (CheckForUnevenTeams( NULL ));
+
+				// AQ2 Heroes
+				if (use_heroes->value == 0) {
+					while (CheckForUnevenTeams( NULL ));
+				}
+				// AQ2 Heroes end
 			}
 			return 0; //CTF and teamDM dont need to check winner, its not round based
 		}
@@ -2829,16 +2858,16 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			((s2f & SCORES2_ACC)    ? " Acc"    : "")
 		);
 		sprintf( string + strlen(string),
-			"yv 40 string2 \"%sŸ%s%s%s%s%s%s%s%s\" ",
-			((s2f & SCORES2_TEAM)   ? "Ÿ "   : ""),
-			((s2f & SCORES2_TIME)   ? " Ÿ"   : ""),
-			((s2f & SCORES2_PING)   ? " Ÿ"   : ""),
-			((s2f & SCORES2_CAPS)   ? " Ÿ"   : ""),
-			((s2f & SCORES2_SCORE)  ? " Ÿ"  : ""),
-			((s2f & SCORES2_KILLS)  ? " Ÿ"  : ""),
-			((s2f & SCORES2_DEATHS) ? " Ÿ" : ""),
-			((s2f & SCORES2_DAMAGE) ? " Ÿ" : ""),
-			((s2f & SCORES2_ACC)    ? " Ÿ"   : "")
+			"yv 40 string2 \"%sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%s%s%s%s%s%s%s%s\" ",
+			((s2f & SCORES2_TEAM)   ? "ï¿½ï¿½ï¿½ï¿½ "   : ""),
+			((s2f & SCORES2_TIME)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_PING)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_CAPS)   ? " ï¿½ï¿½ï¿½ï¿½"   : ""),
+			((s2f & SCORES2_SCORE)  ? " ï¿½ï¿½ï¿½ï¿½ï¿½"  : ""),
+			((s2f & SCORES2_KILLS)  ? " ï¿½ï¿½ï¿½ï¿½ï¿½"  : ""),
+			((s2f & SCORES2_DEATHS) ? " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : ""),
+			((s2f & SCORES2_DAMAGE) ? " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" : ""),
+			((s2f & SCORES2_ACC)    ? " ï¿½ï¿½ï¿½"   : "")
 		);
 
 		line_y = 48;

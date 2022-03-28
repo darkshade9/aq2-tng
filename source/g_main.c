@@ -462,6 +462,10 @@ cvar_t *jump;			// jumping mod
 // AQ2 ETE Add
 cvar_t *e_enhancedSlippers;
 
+// AQ2 Heroes
+cvar_t *use_heroes;
+cvar_t *heroweapon;
+
 void SpawnEntities (char *mapname, char *entities, char *spawnpoint);
 void ClientThink (edict_t * ent, usercmd_t * cmd);
 qboolean ClientConnect (edict_t * ent, char *userinfo);

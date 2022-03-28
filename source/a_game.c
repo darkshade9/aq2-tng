@@ -174,6 +174,92 @@ void ReadConfigFile()
 	fclose(config_file);
 }
 
+void ReadSceneFile() //ESJ based on ReadConfigFile
+{
+    FILE *scene_file;
+    char buf[MAX_STR_LEN];
+    char reading_section[MAX_STR_LEN];
+	char scenepath[MAX_STR_LEN];
+    int lines_into_section = -1;
+
+	sprintf(scenepath, "%s/", GAMEVERSION);
+	strcat(scenepath, level.mapname);
+	strcat(scenepath, ".hro");
+
+	scene_file = fopen(scenepath, "r");
+    if (scene_file == NULL)
+	{
+		gi.dprintf("Unable to read %s\n", scenepath);
+	    return;
+	}
+
+    while (fgets(buf, MAX_STR_LEN - 10, scene_file) != NULL)
+    {
+		int bs;
+        bs = strlen(buf);
+        while (buf[bs-1] == '\r' || buf[bs-1] == '\n')
+        {
+			buf[bs-1] = 0;
+            bs--;
+        }
+
+        if ((buf[0] == '/' && buf[1] == '/') || buf[0] == 0)
+        {
+			continue;
+        }
+		
+		if (buf[0] == '[')
+		{
+			char *p;
+			p = strchr(buf, ']');
+			if (p == NULL)
+				continue;
+			*p = 0;
+			strcpy(reading_section, buf + 1);
+			lines_into_section = 0;
+			continue;
+		}
+		if (buf[0] == '#' && buf[1] == '#' && buf[2] == '#')
+		{
+			lines_into_section = -1;
+			continue;
+		}
+		if (lines_into_section > -1)
+		{
+			if (!strcmp(reading_section, "team1"))
+			{
+				if (lines_into_section == 0)
+				{
+					Q_strncpyz(teams[TEAM1].name, buf, sizeof(teams[TEAM1].skin));
+				}
+				else if (lines_into_section == 1)
+				{
+					Q_strncpyz(teams[TEAM1].skin, buf, sizeof(teams[TEAM1].skin));
+				}
+			}
+			else if (!strcmp(reading_section, "team2"))
+			{
+				if (lines_into_section == 0)
+				{
+					Q_strncpyz(teams[TEAM2].name, buf, sizeof(teams[TEAM2].skin));
+				}
+				else if (lines_into_section == 1)
+				{
+					Q_strncpyz(teams[TEAM2].skin, buf, sizeof(teams[TEAM2].skin));
+				}
+			}
+			else if (!strcmp(reading_section, "weapon"))
+			{
+				Q_strncpyz(heroweapon->string, buf, sizeof(heroweapon));
+			}
+			lines_into_section++;
+		}       
+	}
+
+	Com_sprintf(teams[TEAM1].skin_index, sizeof(teams[TEAM1].skin_index), "../players/%s_i", teams[TEAM1].skin);
+	Com_sprintf(teams[TEAM2].skin_index, sizeof(teams[TEAM2].skin_index), "../players/%s_i", teams[TEAM2].skin);
+}
+
 void ReadMOTDFile()
 {
 	FILE *motd_file;
