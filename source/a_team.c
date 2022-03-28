@@ -641,7 +641,7 @@ void QuakeNigguhz (edict_t * ent, pmenu_t * p)
 // AQ2:TNG Deathwatch - Editing all menus to show the correct credits, version, names, locations, urls, etc
 pmenu_t creditsmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"���������������������������", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"", PMENU_ALIGN_CENTER, NULL, NULL},
   {"*Design Team", PMENU_ALIGN_LEFT, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   {"Deathwatch", PMENU_ALIGN_LEFT, NULL, DoAGoodie},
@@ -671,7 +671,7 @@ pmenu_t creditsmenu[] = {
 
 pmenu_t weapmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"���������������������������", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Weapon", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG - Igor adding wp_flags
@@ -698,7 +698,7 @@ pmenu_t weapmenu[] = {
 
 pmenu_t itemmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"���������������������������", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"", PMENU_ALIGN_CENTER, NULL, NULL},
   {"Select your Item", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_LEFT, NULL, NULL},
   //AQ2:TNG Igor adding itm_flags
@@ -727,7 +727,7 @@ void VotingMenu (edict_t * ent, pmenu_t * p)
 
 pmenu_t joinmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
-  {"���������������������������", PMENU_ALIGN_CENTER, NULL, NULL},
+  {"", PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* lvl name */ , PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL, PMENU_ALIGN_CENTER, NULL, NULL},
   {NULL /* team 1 */ , PMENU_ALIGN_LEFT, NULL, JoinTeam1},

@@ -329,6 +329,7 @@ void InitGame( void )
 	gi.dprintf( "==== InitGame ====\n" );
 
 	ReadConfigFile();
+	ReadSceneFile();
 	ReadMOTDFile();
 
 	gun_x = gi.cvar( "gun_x", "0", 0 );

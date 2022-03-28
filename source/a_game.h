@@ -99,6 +99,7 @@ extern char *map_rotation[];
 extern int num_maps, cur_map, rand_map, num_allvotes;	// num_allvotes added by Igor[Rock]
 
 void ReadConfigFile ();
+void ReadSceneFile ();
 void ReadMOTDFile ();
 void PrintMOTD (edict_t *ent);
 void stuffcmd (edict_t *ent, char *s);
