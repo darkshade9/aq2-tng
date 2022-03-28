@@ -543,7 +543,10 @@ void InitGame( void )
 
 	e_enhancedSlippers = gi.cvar( "e_enhancedSlippers", "0", 0); // darksaint: AQ2 ETE
 
-	use_heroes = gi.cvar( "use_heroes", "0", 0); // darksaint: AQ2 Heroes
+	// AQ2 Heroes
+	use_heroes = gi.cvar( "use_heroes", "0", 0);
+	heroweapon = gi.cvar ("heroweapon", "", CVAR_SERVERINFO);
+	// AQ2 heroes end
 
 	// items
 	InitItems();

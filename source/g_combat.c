@@ -603,9 +603,19 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 						client->pers.netname);
 				}
 
-				gi.cprintf(targ, PRINT_HIGH, "Leg damage\n");
-				targ->client->leg_damage = 1;
-				targ->client->leghits++;
+				// AQ2 Heroes
+				if (use_heroes->value){
+					if (targ->client->resp.team == 2) //ESJ Heroes don't limp
+						{
+							targ->client->leg_damage = 1;
+							targ->client->leghits++;
+						}
+				} else {
+					// AQ2 Heroes end
+					gi.cprintf(targ, PRINT_HIGH, "Leg damage\n");
+					targ->client->leg_damage = 1;
+					targ->client->leghits++;
+				}
 			}
 			else if (z_rel < STOMACH_DAMAGE)
 			{
@@ -709,17 +719,40 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 			spray_sniper_blood(targ, temporig, dir);
 	}
 
-	if (mod == MOD_FALLING && !(targ->flags & FL_GODMODE) )
-	{
-		if (client && targ->health > 0)
+	if (mod == MOD_FALLING && !(targ->flags & FL_GODMODE) ) {
+		// AQ2 Heroes
+		if (use_heroes->value) { //ESJ no limp for heroes
+			!(targ->client->resp.team == 1);
+			return;
+		}
+		else
+		// AQ2 Heroes end
 		{
-			gi.cprintf(targ, PRINT_HIGH, "Leg damage\n");
-			client->leg_damage = 1;
-			client->leghits++;
-			//bleeding = 1; for testing
+			if (client && targ->health > 0)
+			{
+				gi.cprintf(targ, PRINT_HIGH, "Leg damage\n");
+				client->leg_damage = 1;
+				client->leghits++;
+				//bleeding = 1; for testing
+			}
 		}
 	}
 
+	// AQ2 Heroes
+	if (targ->client && targ->client->resp.team == 1)  //ESJ take damage or give points, depending
+		{
+			if (attacker->client) //not fall damage or the like
+			{
+				attacker->client->points += damage;
+				while (attacker->client->points >= 100)
+				{
+					attacker->client->resp.score++;
+					attacker->client->points -= 100;
+				}
+			}
+			damage = 0;
+		}
+	// AQ2 Heroes end
 
 	// friendly fire avoidance
 	// if enabled you can't hurt teammates (but you can hurt yourself)

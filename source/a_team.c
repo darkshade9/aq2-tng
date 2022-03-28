@@ -914,7 +914,7 @@ void Team_f (edict_t * ent)
 	char team[24];
 
 	// AQ2 Heroes
-	if (use_heroes->value == 1) {
+	if (use_heroes->value) {
 			gi.centerprintf(ent, PRINT_HIGH, "You can't change teams in Heroes!");
         return;
 	}
@@ -1260,7 +1260,7 @@ void UpdateJoinMenu( void )
 	}
 
 	// AQ2 Heroes
-	if (use_heroes->value == 1) {
+	if (use_heroes->value) {
 		sprintf(team1players, ""); //AQ2 Heroes: ESJ Don't display # of players
 	} else {
 		sprintf (team1players, "  (%d players)", num1);
@@ -1473,7 +1473,7 @@ qboolean BothTeamsHavePlayers()
 	}
 
 	// AQ2 Heroes
-	if (use_heroes->value == 1) {
+	if (use_heroes->value) {
 		if (onteam1 == 0 && onteam2 > 1) //ESJ make one the hero if necessary
 			{
 				i = 0;

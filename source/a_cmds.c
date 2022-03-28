@@ -307,7 +307,7 @@ void Cmd_Reload_f(edict_t * ent)
 			// this gives them a chance to break off from reloading to fire the weapon - zucc
 			
 			// ESJ - Heroes addition by darksaint
-			if (use_heroes->value == 1 && ent->client->resp.team == 2){
+			if (use_heroes->value && ent->client->resp.team == 2){
 				(ent->client->inventory[ent->client->ammo_index])--;
 			}
 			// ESJ End
@@ -358,7 +358,7 @@ void Cmd_Reload_f(edict_t * ent)
 			// this gives them a chance to break off from reloading to fire the weapon - zucc
 			
 			// ESJ - Heroes addition by darksaint
-			if (use_heroes->value == 1 && ent->client->resp.team == 2){
+			if (use_heroes->value && ent->client->resp.team == 2){
 				(ent->client->inventory[ent->client->ammo_index])--;
 			}
 			

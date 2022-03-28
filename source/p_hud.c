@@ -227,6 +227,11 @@ void DeathmatchScoreboardMessage (edict_t * ent, edict_t * killer)
 		// add a dogtag
 		if (cl_ent == ent)
 			tag = "tag1";
+		// AQ2 Heroes
+		else if (use_heroes->value)
+			if (cl_ent->client->resp.team == 1) //ESJ Hero is always the killer
+				tag = "tag2";
+		// AQ2 Heroes end
 		else if (cl_ent == killer)
 			tag = "tag2";
 		else

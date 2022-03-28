@@ -852,7 +852,10 @@ void kick_attack (edict_t *ent)
 			|| tr.ent->client->curr_weap == MP5_NUM
 			|| tr.ent->client->curr_weap == M3_NUM
 			|| tr.ent->client->curr_weap ==	SNIPER_NUM
-			|| tr.ent->client->curr_weap == HC_NUM))		// crandom() > .8 ) 
+			|| tr.ent->client->curr_weap == HC_NUM)
+			// AQ2 Heroes
+			&& ((use_heroes->value) && !(tr.ent->client->resp.team == 1)) )		// crandom() > .8 ) 
+			// AQ2 Heroes end
 		{
 			// zucc fix this so reloading won't happen on the new gun!
 			tr.ent->client->reload_attempts = 0;

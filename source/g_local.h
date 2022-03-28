@@ -1735,6 +1735,11 @@ struct gclient_s
 	edict_t		*ctf_grapple;		// entity of grapple
 	int			ctf_grapplestate;		// true if pulling
 	int			ctf_grapplereleaseframe;	// frame of grapple release
+
+	// AQ2 Heroes
+	int			points;
+	float		when;
+	// AQ2 Heroes end
 };
 
 

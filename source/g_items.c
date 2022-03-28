@@ -315,6 +315,12 @@ qboolean Pickup_ItemPack (edict_t * ent, edict_t * other)
 //zucc pickup function for special items
 qboolean Pickup_Special (edict_t * ent, edict_t * other)
 {
+	// AQ2 Heroes
+	if (use_heroes->value) {
+		if (other->client->resp.team == 1) //ESJ Heroes don't pick up items.
+			return false;
+	}
+	// AQ2 Heroes end
 	if (other->client->unique_item_total >= unique_items->value)
 		return false;
 

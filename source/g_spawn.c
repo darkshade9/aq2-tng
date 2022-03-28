@@ -910,7 +910,47 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 			gi.dprintf ("Jump Enabled - Forcing Domination off\n");
 			gi.cvar_forceset(dom->name, "0");
 		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("Jump Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
+		}
 	}
+	// AQ2 Heroes
+	else if (use_heroes->value)
+	{
+		if (teamplay->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing teamplay on\n");
+			gi.cvar_forceset(teamplay->name, "1");
+		}
+		if (use_3teams->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing 3Teams off\n");
+			gi.cvar_forceset(use_3teams->name, "0");
+		}
+		if (teamdm->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing Team DM off\n");
+			gi.cvar_forceset(teamdm->name, "0");
+		}
+		if (use_tourney->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing Tourney off\n");
+			gi.cvar_forceset(use_tourney->name, "0");
+		}
+		if (ctf->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing CTF off\n");
+			gi.cvar_forceset(ctf->name, "0");
+		}
+		if (dom->value)
+		{
+			gi.dprintf ("Heroes Enabled - Forcing Domination off\n");
+			gi.cvar_forceset(dom->name, "0");
+		}
+	}
+	// AQ2 Heroes end
 	else if (ctf->value)
 	{
 		if (ctf->value == 2)
@@ -944,6 +984,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 			gi.dprintf ("CTF Enabled - Forcing Domination off\n");
 			gi.cvar_forceset(dom->name, "0");
 		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("CTF Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
+		}
 		if (!DMFLAGS(DF_NO_FRIENDLY_FIRE))
 		{
 			gi.dprintf ("CTF Enabled - Forcing Friendly Fire off\n");
@@ -974,6 +1019,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 		{
 			gi.dprintf ("Domination Enabled - Forcing Tourney off\n");
 			gi.cvar_forceset(use_tourney->name, "0");
+		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("Domination Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
 		}
 		strcpy(teams[TEAM1].name, "RED");
 		strcpy(teams[TEAM2].name, "BLUE");
@@ -1016,6 +1066,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 			gi.dprintf ("3 Teams Enabled - Forcing Tourney off\n");
 			gi.cvar_forceset(use_tourney->name, "0");
 		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("3 Teams Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
+		}
 	}
 	else if (matchmode->value)
 	{
@@ -1030,6 +1085,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 			gi.dprintf ("Matchmode Enabled - Forcing Tourney off\n");
 			gi.cvar_forceset(use_tourney->name, "0");
 		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("Matchmode Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
+		}
 	}
 	else if (use_tourney->value)
 	{
@@ -1038,6 +1098,11 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 		{
 			gi.dprintf ("Tourney Enabled - Forcing teamplay on\n");
 			gi.cvar_forceset(teamplay->name, "1");
+		}
+		if (use_heroes->value)
+		{
+			gi.dprintf ("Tourney Enabled - Forcing Heroes off\n");
+			gi.cvar_forceset(use_heroes->name, "0");
 		}
 	}
 	else if (teamplay->value)
@@ -1181,6 +1246,12 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 		if(!use_oldspawns->value)
 			NS_GetSpawnPoints();
 	}
+
+	// AQ2 Heroes
+	if (use_heroes->value) {
+		ReadSceneFile();
+	}
+	// AQ2 Heroes end
 
 	G_LoadLocations();
 
