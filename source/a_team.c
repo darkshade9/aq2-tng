@@ -1472,6 +1472,19 @@ qboolean BothTeamsHavePlayers()
 			players[game.clients[i].resp.team]++;
 	}
 
+	// AQ2 Heroes
+	if (use_heroes->value == 1) {
+		if (onteam1 == 0 && onteam2 > 1) //ESJ make one the hero if necessary
+			{
+				i = 0;
+				game.clients[i].resp.team = TEAM1;
+				onteam1++;
+				onteam2--;
+				gi.bprintf (PRINT_HIGH, "%s will be played by %s\n", TeamName(TEAM1), game.clients[i].pers.netname);
+			}
+	}
+	// AQ2 Heroes end
+
 	teamsWithPlayers = 0;
 	for (i = TEAM1; i <= teamCount; i++)
 	{
@@ -1932,6 +1945,7 @@ int WonGame (int winner)
 {
 	edict_t *player, *cl_ent; // was: edict_t *player;
 	int i;
+	int nexthero = 0;
 	char arg[64];
 
 	gi.bprintf (PRINT_HIGH, "The round is over:\n");
@@ -1963,6 +1977,47 @@ int WonGame (int winner)
 				TourneyWinner (player);
 			}
 		}
+
+		// AQ2 Heroes
+		else if (use_heroes->value)
+		{
+			for (i = 0; i < game.maxclients; i++)  //ESJ Find next hero.  Declarations at top.
+			{
+				cl_ent = &g_edicts[1+i];
+				if (!cl_ent->inuse)
+					continue;
+				if (game.clients[i].resp.team == TEAM1)
+				{
+					game.clients[i].when = level.time;
+					game.clients[i].resp.team = TEAM2;
+					nexthero = i + 1;
+				}
+			}
+
+			i = 1;
+			while (i)
+			{
+				cl_ent = &g_edicts[1+nexthero];
+				if (!cl_ent->inuse || cl_ent->client->resp.team == NOTEAM)
+				{
+					nexthero++;
+					if (nexthero == game.maxclients)
+						nexthero = 0;
+				}
+				else
+				{
+					game.clients[nexthero].resp.team = TEAM1;
+					i = 0;
+				}
+			}
+
+
+			gi.bprintf (PRINT_HIGH, "%s will now be played by %s\n", TeamName(TEAM1), game.clients[nexthero].pers.netname);
+
+			return 0;
+		}
+		// AQ2 Heroes end
+
 		else
 		{
 			gi.bprintf (PRINT_HIGH, "%s won!\n", TeamName(winner));
@@ -2213,6 +2268,13 @@ int CheckTeamRules (void)
 		{
 			if (!checked_tie)
 			{
+				// AQ2 Heroes
+				if (use_heroes->value) {
+					holding_on_tie_check = 1; //ESJ no delay
+					return;
+				}
+				//AQ2 Heroes end
+
 				holding_on_tie_check = 50;
 				return 0;
 			}
