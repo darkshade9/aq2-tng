@@ -918,6 +918,7 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 	}
 	// AQ2 Heroes
 	else if (use_heroes->value)
+	gi.cvar_forceset(use_balancer, "0"); // Don't use TNG balancer, heroes is designed to have unbalanced teams
 	{
 		if (teamplay->value)
 		{

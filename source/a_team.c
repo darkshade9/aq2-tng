@@ -915,7 +915,7 @@ void Team_f (edict_t * ent)
 
 	// AQ2 Heroes
 	if (use_heroes->value) {
-			gi.centerprintf(ent, PRINT_HIGH, "You can't change teams in Heroes!");
+			gi.cprintf(ent, PRINT_HIGH, "You can't change teams in Heroes!");
         return;
 	}
 	// // AQ2 Heroes End
@@ -1261,9 +1261,9 @@ void UpdateJoinMenu( void )
 
 	// AQ2 Heroes
 	if (use_heroes->value) {
-		sprintf(team1players, ""); //AQ2 Heroes: ESJ Don't display # of players
+		sprintf(team1players, "\n"); //AQ2 Heroes: ESJ Don't display # of players
 	} else {
-		sprintf (team1players, "  (%d players)", num1);
+		sprintf(team1players, "  (%d players)", num1);
 	}
 	// AQ2 Heroes end
 
@@ -1472,18 +1472,18 @@ qboolean BothTeamsHavePlayers()
 			players[game.clients[i].resp.team]++;
 	}
 
-	// AQ2 Heroes
-	if (use_heroes->value) {
-		if (onteam1 == 0 && onteam2 > 1) //ESJ make one the hero if necessary
-			{
-				i = 0;
-				game.clients[i].resp.team = TEAM1;
-				onteam1++;
-				onteam2--;
-				gi.bprintf (PRINT_HIGH, "%s will be played by %s\n", TeamName(TEAM1), game.clients[i].pers.netname);
-			}
-	}
-	// AQ2 Heroes end
+	// // AQ2 Heroes
+	// if (use_heroes->value) {
+	// 	if (team1count == 0 && team2count > 1) //ESJ make one the hero if necessary
+	// 		{
+	// 			i = 0;
+	// 			game.clients[i].resp.team = TEAM1;
+	// 			team1count++;
+	// 			team2count--;
+	// 			gi.bprintf (PRINT_HIGH, "%s will be played by %s\n", TeamName(TEAM1), game.clients[i].pers.netname);
+	// 		}
+	// }
+	// // AQ2 Heroes end
 
 	teamsWithPlayers = 0;
 	for (i = TEAM1; i <= teamCount; i++)
@@ -2271,7 +2271,7 @@ int CheckTeamRules (void)
 				// AQ2 Heroes
 				if (use_heroes->value) {
 					holding_on_tie_check = 1; //ESJ no delay
-					return;
+					return 0;
 				}
 				//AQ2 Heroes end
 
