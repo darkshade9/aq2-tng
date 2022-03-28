@@ -919,7 +919,7 @@ void Team_f (edict_t * ent)
         return;
 	}
 	// // AQ2 Heroes End
-	
+
 	if (!teamplay->value)
 		return;
 
@@ -2858,16 +2858,16 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			((s2f & SCORES2_ACC)    ? " Acc"    : "")
 		);
 		sprintf( string + strlen(string),
-			"yv 40 string2 \"%s���������������%s%s%s%s%s%s%s%s\" ",
-			((s2f & SCORES2_TEAM)   ? "���� "   : ""),
-			((s2f & SCORES2_TIME)   ? " ����"   : ""),
-			((s2f & SCORES2_PING)   ? " ����"   : ""),
-			((s2f & SCORES2_CAPS)   ? " ����"   : ""),
-			((s2f & SCORES2_SCORE)  ? " �����"  : ""),
-			((s2f & SCORES2_KILLS)  ? " �����"  : ""),
-			((s2f & SCORES2_DEATHS) ? " ������" : ""),
-			((s2f & SCORES2_DAMAGE) ? " ������" : ""),
-			((s2f & SCORES2_ACC)    ? " ���"   : "")
+			"yv 40 string2 \"%s%s%s%s%s%s%s%s%s\" ",
+			((s2f & SCORES2_TEAM)   ? " "   : ""),
+			((s2f & SCORES2_TIME)   ? " "   : ""),
+			((s2f & SCORES2_PING)   ? " "   : ""),
+			((s2f & SCORES2_CAPS)   ? " "   : ""),
+			((s2f & SCORES2_SCORE)  ? " "  : ""),
+			((s2f & SCORES2_KILLS)  ? " "  : ""),
+			((s2f & SCORES2_DEATHS) ? " " : ""),
+			((s2f & SCORES2_DAMAGE) ? " " : ""),
+			((s2f & SCORES2_ACC)    ? " "   : "")
 		);
 
 		line_y = 48;
