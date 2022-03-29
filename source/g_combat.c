@@ -722,8 +722,8 @@ T_Damage (edict_t * targ, edict_t * inflictor, edict_t * attacker, vec3_t dir,
 	if (mod == MOD_FALLING && !(targ->flags & FL_GODMODE) ) {
 		// AQ2 Heroes
 		if (use_heroes->value) { //ESJ no limp for heroes
-			!(targ->client->resp.team == 1);
-			return 0;
+			if (!(targ->client->resp.team == 1))
+				return;
 		}
 		else
 		// AQ2 Heroes end
