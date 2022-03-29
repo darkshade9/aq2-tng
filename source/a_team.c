@@ -2941,7 +2941,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			Com_sprintf( damage_buf, 8, " %6i", min( 999999, cl->resp.damage_dealt) );
 			Com_sprintf( acc_buf   , 5, " %3.f", cl->resp.shotsTotal ? (double) cl->resp.hitsTotal * 100.0 / (double) cl->resp.shotsTotal : 0. );
 
-			sprintf( string + strlen(string), "yv %d string \"%s%-15s\"",
+			sprintf( string + strlen(string), "yv %d string \"%s%-15s%s%s%s%s%s%s%s%s\"",
 				line_y,
 				((s2f & SCORES2_TEAM)   ? team_buf   : ""),
 				cl->pers.netname,
