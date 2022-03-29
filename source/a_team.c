@@ -2892,7 +2892,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 		sprintf( string, "xv %i ", line_x );
 
 		sprintf( string + strlen(string),
-			"yv 32 string2 \"%sPlayer         %s%s%s%s%s%s%s%s\" ",
+			"yv 32 string2 \" Player         \" ",
 			((s2f & SCORES2_TEAM)   ? "Team "   : ""),
 			((s2f & SCORES2_TIME)   ? " Time"   : ""),
 			((s2f & SCORES2_PING)   ? " Ping"   : ""),
@@ -2904,16 +2904,16 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			((s2f & SCORES2_ACC)    ? " Acc"    : "")
 		);
 		sprintf( string + strlen(string),
-			"yv 40 string2 \"%s���������������%s%s%s%s%s%s%s%s\" ",
-			((s2f & SCORES2_TEAM)   ? "���� "   : ""),
-			((s2f & SCORES2_TIME)   ? " ����"   : ""),
-			((s2f & SCORES2_PING)   ? " ����"   : ""),
-			((s2f & SCORES2_CAPS)   ? " ����"   : ""),
-			((s2f & SCORES2_SCORE)  ? " �����"  : ""),
-			((s2f & SCORES2_KILLS)  ? " �����"  : ""),
-			((s2f & SCORES2_DEATHS) ? " ������" : ""),
-			((s2f & SCORES2_DAMAGE) ? " ������" : ""),
-			((s2f & SCORES2_ACC)    ? " ���"   : "")
+			"yv 40 string2 \"\" ",
+			((s2f & SCORES2_TEAM)   ? " "   : ""),
+			((s2f & SCORES2_TIME)   ? " "   : ""),
+			((s2f & SCORES2_PING)   ? " "   : ""),
+			((s2f & SCORES2_CAPS)   ? " "   : ""),
+			((s2f & SCORES2_SCORE)  ? " "  : ""),
+			((s2f & SCORES2_KILLS)  ? " "  : ""),
+			((s2f & SCORES2_DEATHS) ? " " : ""),
+			((s2f & SCORES2_DAMAGE) ? " " : ""),
+			((s2f & SCORES2_ACC)    ? " "   : "")
 		);
 
 		line_y = 48;
@@ -2941,7 +2941,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			Com_sprintf( damage_buf, 8, " %6i", min( 999999, cl->resp.damage_dealt) );
 			Com_sprintf( acc_buf   , 5, " %3.f", cl->resp.shotsTotal ? (double) cl->resp.hitsTotal * 100.0 / (double) cl->resp.shotsTotal : 0. );
 
-			sprintf( string + strlen(string), "yv %d string \"%s%-15s%s%s%s%s%s%s%s%s\"",
+			sprintf( string + strlen(string), "yv %d string \"%s%-15s\"",
 				line_y,
 				((s2f & SCORES2_TEAM)   ? team_buf   : ""),
 				cl->pers.netname,
