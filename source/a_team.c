@@ -1473,16 +1473,17 @@ qboolean BothTeamsHavePlayers()
 	}
 
 	// // AQ2 Heroes
-	// if (use_heroes->value) {
-	// 	if (team1count == 0 && team2count > 1) //ESJ make one the hero if necessary
-	// 		{
-	// 			i = 0;
-	// 			game.clients[i].resp.team = TEAM1;
-	// 			team1count++;
-	// 			team2count--;
-	// 			gi.bprintf (PRINT_HIGH, "%s will be played by %s\n", TeamName(TEAM1), game.clients[i].pers.netname);
-	// 		}
-	// }
+		// if (use_heroes->value) {
+		// 	teamNum = game.clients[i].resp.team;
+		// 	if (teamNum[TEAM1] == 0 && teamNum[TEAM2] > 1) //ESJ make one the hero if necessary
+		// 		{
+		// 			i = 0;
+		// 			game.clients[i].resp.team = TEAM1;
+		// 			team1count++;
+		// 			team2count--;
+		// 			gi.bprintf (PRINT_HIGH, "%s will be played by %s\n", TeamName(TEAM1), game.clients[i].pers.netname);
+		// 		}
+		// }
 	// // AQ2 Heroes end
 
 	teamsWithPlayers = 0;

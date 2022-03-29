@@ -235,7 +235,7 @@ void DeathmatchScoreboardMessage (edict_t * ent, edict_t * killer)
 		{
 			if (cl_ent == ent)
 				tag = "tag1";
-			else if ((cl_ent == killer) || (use_heroes->value) && (cl_ent->client->resp.team == 1))
+			else if ((cl_ent == killer) || (use_heroes->value && cl_ent->client->resp.team == 1))
 				tag = "tag2";
 			else
 				tag = NULL;
