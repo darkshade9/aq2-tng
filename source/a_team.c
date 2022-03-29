@@ -639,6 +639,9 @@ void QuakeNigguhz (edict_t * ent, pmenu_t * p)
 }
 
 // AQ2:TNG Deathwatch - Editing all menus to show the correct credits, version, names, locations, urls, etc
+
+// darksaint notes:  If you're editing this and your scoreboard looks screwy, the scoreboard uses conchars
+// at position 27, 28 and 29 (27 and 29 are end borders, 28 is the inner filler)
 pmenu_t creditsmenu[] = {
   {"*" TNG_TITLE, PMENU_ALIGN_CENTER, NULL, NULL},
   {"", PMENU_ALIGN_CENTER, NULL, NULL},
@@ -2905,7 +2908,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 		);
 		sprintf( string + strlen(string),
 			"yv 40 string2 \"%s%s%s%s%s%s%s%s%s\" ",
-			((s2f & SCORES2_TEAM)   ? " "   : ""),
+			((s2f & SCORES2_TEAM)   ? " "   : ""),
 			((s2f & SCORES2_TIME)   ? " "   : ""),
 			((s2f & SCORES2_PING)   ? " "   : ""),
 			((s2f & SCORES2_CAPS)   ? " "   : ""),

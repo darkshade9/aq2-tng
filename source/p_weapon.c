@@ -1281,10 +1281,9 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 				ent->client->dual_rds += ent->client->mk23_max;
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "dual") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "dual") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
-				(ent->client->inventory[ent->client->ammo_index])--;
 				if (ent->client->inventory[ent->client->ammo_index] < 0)
 				{
 					ent->client->inventory[ent->client->ammo_index] = 0;
@@ -1302,7 +1301,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "mp5") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "mp5") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
 
@@ -1321,7 +1320,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 				(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "m4") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "m4") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
 				if (ent->client->inventory[ent->client->ammo_index] < 0)
@@ -1339,7 +1338,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 				(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "m3") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "m3") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
 				if (ent->client->inventory[ent->client->ammo_index] < 0)
@@ -1365,7 +1364,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 						ent->client->cannon_rds = ent->client->cannon_max;
 					//AQ2 Heroes
 					if (use_heroes->value)
-						if (!((strcmp(heroweapon->string, "hc") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+						if (!((strcmp(heroweapon->string, "hc") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 							(ent->client->inventory[ent->client->ammo_index])--;
 					//AQ2 Heroes end
 
@@ -1389,7 +1388,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 				(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "sniper") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "sniper") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
 				if (ent->client->inventory[ent->client->ammo_index] < 0)
@@ -1405,7 +1404,7 @@ Weapon_Generic(edict_t* ent, int FRAME_ACTIVATE_LAST, int FRAME_FIRE_LAST,
 				(ent->client->inventory[ent->client->ammo_index]) -= 2;
 				//AQ2 Heroes
 				if (use_heroes->value)
-					if (!((strcmp(heroweapon->string, "dual") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+					if (!((strcmp(heroweapon->string, "dual") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 						(ent->client->inventory[ent->client->ammo_index])--;
 				//AQ2 Heroes end
 				if (ent->client->inventory[ent->client->ammo_index] < 0)
