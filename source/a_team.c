@@ -2892,7 +2892,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 		sprintf( string, "xv %i ", line_x );
 
 		sprintf( string + strlen(string),
-			"yv 32 string2 \" Player         \" ",
+			"yv 32 string2 \"%sPlayer         %s%s%s%s%s%s%s%s\" ",
 			((s2f & SCORES2_TEAM)   ? "Team "   : ""),
 			((s2f & SCORES2_TIME)   ? " Time"   : ""),
 			((s2f & SCORES2_PING)   ? " Ping"   : ""),
@@ -2904,7 +2904,7 @@ void A_ScoreboardMessage (edict_t * ent, edict_t * killer)
 			((s2f & SCORES2_ACC)    ? " Acc"    : "")
 		);
 		sprintf( string + strlen(string),
-			"yv 40 string2 \"\" ",
+			"yv 40 string2 \"%s%s%s%s%s%s%s%s%s\" ",
 			((s2f & SCORES2_TEAM)   ? " "   : ""),
 			((s2f & SCORES2_TIME)   ? " "   : ""),
 			((s2f & SCORES2_PING)   ? " "   : ""),
