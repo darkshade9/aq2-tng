@@ -225,21 +225,15 @@ void DeathmatchScoreboardMessage (edict_t * ent, edict_t * killer)
 		y = 32 + 32 * (i % 6);
 
 		// add a dogtag
+		if (cl_ent == ent)
+			tag = "tag1";		
 		// AQ2 Heroes
-		if (use_heroes->value) {
-			if (cl_ent->client->resp.team == 1) //ESJ Hero is always the killer
-				tag = "tag2";
-		}
+		else if ((cl_ent == killer) || (use_heroes->value && cl_ent->client->resp.team == 1))
 		// AQ2 Heroes end
+			tag = "tag2";
 		else
-		{
-			if (cl_ent == ent)
-				tag = "tag1";
-			else if ((cl_ent == killer) || (use_heroes->value && cl_ent->client->resp.team == 1))
-				tag = "tag2";
-			else
-				tag = NULL;
-		}
+			tag = NULL;
+
 		if (tag)
 		{
 			Com_sprintf (entry, sizeof (entry),
