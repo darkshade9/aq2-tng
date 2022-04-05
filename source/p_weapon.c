@@ -3560,7 +3560,7 @@ void gas_fire(edict_t* ent)
 
 	//AQ2 Heroes
 	if (use_heroes->value)
-		if (!((strcmp(heroweapon->string, "grenade") == 0) && (ent->client->resp.team == 1)))  //ESJ Heroes don't run out
+		if (!((strcmp(heroweapon->string, "grenade") == 0) && (ent->client->resp.team == TEAM1)))  //ESJ Heroes don't run out
 			(ent->client->inventory[ent->client->ammo_index])--;
 	//AQ2 Heroes end
 	INV_AMMO(ent, GRENADE_NUM)--;
