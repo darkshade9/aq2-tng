@@ -655,6 +655,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	int loc;
 	char *message;
 	char *message2;
+	char *statsmsg;
 	char death_msg[1024];	// enough in all situations? -FB
 	qboolean friendlyFire;
 	char *special_message = NULL;
@@ -829,6 +830,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				else
 					message = " has a hole in its head from";
 				message2 = "'s Mark 23 pistol";
+				statsmsg = " MK23_SINGLE ";
 				break;
 			case LOC_CDAM:
 				message = " loses a vital chest organ thanks to";
