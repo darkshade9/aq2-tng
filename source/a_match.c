@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //-----------------------------------------------------------------------------
 // Matchmode related code
 //
@@ -623,6 +624,8 @@ void Cmd_TogglePause_f(edict_t * ent, qboolean pause)
 }
 
 =======
+=======
+>>>>>>> Set CRLF to LF and fixed setmaster value
 //-----------------------------------------------------------------------------
 // Matchmode related code
 //
@@ -1246,4 +1249,7 @@ void Cmd_TogglePause_f(edict_t * ent, qboolean pause)
 	}
 }
 
+<<<<<<< HEAD
 >>>>>>> Changed extended-ASCII scoreboard in favor of using conchars
+=======
+>>>>>>> Set CRLF to LF and fixed setmaster value
