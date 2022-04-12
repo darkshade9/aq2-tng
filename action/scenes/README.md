@@ -40,6 +40,10 @@
         * Issued by a client when a map is loaded, it will centerprint the goals of the scenario.
     * **volunteer**
         * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Simiiar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
+    * **sv scenarios** 
+        * Issued via rcon, this lists the maps and associated scenarios in rotation on the server
+    * **sv goto [scn num]**
+        * Issued via rcon, the argument provided changes to the scene number provided by **sv scenarios** in the event that a map has multiple scenarios and the server admin wants to override the default one loaded
     * **e_maxVolunteers**
         * Maximum amount of volunteer per team.  `0` value means there are no restrictions to the amount of volunteers per team.
     * **e_mustVolunteer**
@@ -172,8 +176,17 @@ Points listed here are equivalent to 'frags'
 
 ### Ideas
 
+#### Interactions
+In its final form, Espionage had a Tournament Edition that included Matchplay settings specifically for Espionage.  This was activated by
+* `scripts 1`
+* `matchplay 1`
+Utilizing `matchmode` in TNG, we can incorporate the enhancements of TNG with Espionage to create a similar experience:
+    * `captain` players assigning Leaders if they wish
+    * No need for `teamname` or `teamskin` as they are set in the scene files 
+
+
 #### Improvements
-* I think scoring could be improved
+* Scoring
     * Current ways to score
         * Killing an enemy or enemy Leader
         * Retrieving a briefcase
@@ -184,3 +197,8 @@ Points listed here are equivalent to 'frags'
         * Holding a capturepoint over an interval
     * New ways to score
         * Bonus points for Accuracy (triggered under the same conditions the announcer voiceover says "Accuracy!")
+* Voting
+    * Allow players to vote for scenario/map combinations
+        * Assuming there's a valid scene for the map, defaults to `e_useDefaultScenario` logic
+* Team Swaps
+    * A setting for enabling team swaps in ETV and FRD matches, when halftime is reached (if timelimit is set) or halfway to a roundlimit is reached (10 out of 20 rounds for a single team), pauses the game and swaps members of the teams, and begins again.
