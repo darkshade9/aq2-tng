@@ -6,6 +6,9 @@
 ### [Find/Retrieve/Defend](FRD.md)
 ### [One Flag Capture](OFC.md)
 ---
+# AQDT Official Docs
+### [ATL](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/scenarios-atl.htm) | [CNH](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/scenarios-cnh.htm) | [ETV](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/scenarios-etv.htm) | [CTB](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/scenarios-ctb.htm) | [FRD](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/scenarios-frd.htm)
+---
 ## Definitions
 
 * `scene`: An indivdual file containing `scenarios`
@@ -21,16 +24,40 @@
         * `use_3teams 0` - There is no 3 team Espionage support (yet?)
         * `use_tourney 0` - Disables tournament mode (may revisit for Espionage Tournament Edition?)
         * `use_matchmode 0` - Disables matchmode (may revisit for Espionage Tournament Edition?)
-        * `spawnProtect 0` - This is a DM-only feature
+        * `spawnProtect 0` - This would interfere with the continuous play
     * Requires:
         * `e_maxVolunteers <0|1>` - defaults to 0
         * `e_mustVolunteer <0|1>` - defaults to 0
         * `e_useDefaultScenario <0|1|2|3>` - defaults to 0
         * `e_defaultScenarioName ""` - defaults to "Assassinate The Leader"
         * `e_carrierReturn <0|1>` - defaults to 1
-    * Ignores:
+    * Ignores (weapons and items are set in the scene files):
         * `wp_flags` - Weapon loadouts are managed by the scene, not a dmflag
         * `itm_flags` - Item loadouts are managed by the scene, not a dmflag
+---
+* Espionage cvars and commands
+    * **goals**
+        * Issued by a client when a map is loaded, it will centerprint the goals of the scenario.
+    * **volunteer**
+        * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Simiiar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
+    * **e_maxVolunteers**
+        * Maximum amount of volunteer per team.  `0` value means there are no restrictions to the amount of volunteers per team.
+    * **e_mustVolunteer**
+        * Requires players to issue the `volunteer` command to begin the match.  If this is set to `0`, players will be chosen at random for the Leader position on new round spawn.
+    * **e_useDefaultScenario**
+        * Settings:
+            * `0` - default to normal teamplay for maps where a scenario can't be found
+            * `1` - use scenario specified in e_defaultScenarioName if a scenario can't be found (default)
+            * `2` - use default scenario for all maps
+            * `3` - use default scenario on maps in action.ini instead of action.scp 
+    * **e_defaultScenarioName**
+        * Used in tandem with **e_useDefaultScenario**, it determines which scenario is used if a map is loaded if no scenes are specified.  See the [original documentation](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/esp6.htm) if this is still unclear.
+    * **e_carrierReturn**
+        * Setting this to `0` means the carrier (the player that currently has the enemy briefcase) cannot touch his own briefcase to return it to base.  Setting this to `1` allows the carrier to return his own briefcase to base.
+    * **e_caseReturnTime**
+        * Setting this to a value in seconds of how much time passes since the briefcase has dropped before it automatically returns to base.  Value if `0` means case does not return automatically.  Suggested values here are `45` to `120` seconds.  Maximum value is `300`.
+    * **allowMPELPSuicide** (optional)
+        * It used to be a popular tactic to suicide by the `kill` command after being shot in the stomach by a sniper to deny the sniper his frag at the expense of your own score.  Setting this to `0` meant the game would deny this action.  Setting it to `1` would randomly allow it (<10% chance?)
 
 
 ## Message formatting (`CenterPrintAll`)
@@ -71,7 +98,7 @@ team_2_name must:
 retrieve target_object_2 from target_area_1 and
 bring it to target_area_2
 ```
-
+---
 ## Kill messaging:
 * Killing a Leader
     * Player log:
@@ -87,8 +114,53 @@ bring it to target_area_2
     * Player log:
         * `You get 10 bonus points for surviving the round`
     * No console log(?) since this can be a single player or an array of players
-
-
+---
+## Scoring
+Points listed here are equivalent to 'frags'
+* **ATL**
+    * Defending the Leader (3 pts)
+        * Non-Leader near the Leader and killing an enemy
+        * Leader killing an enemy
+    * Harassing the Leader (3 pts)
+        * Killing non-Leader near the Leader
+    * Leader is assassinated (10 pts)
+        * Awarded to all members of the defending team
+    * You assassinated the Leader (10 pts)
+        * Awarded to the assassin
+* **ETV**
+    * Defending the Leader (3 pts)
+        * Non-Leader near the Leader and killing an enemy
+        * Leader killing an enemy
+    * Harassing the Leader (3 pts)
+        * Killing non-Leader near the Leader
+    * Leader reaches escort point (10 pts)
+        * Awarded to all members of the escort team, dead or alive
+    * Leader is assassinated (10 pts)
+        * Awarded to all members of the defending team
+    * You assassinated the Leader (10 pts)
+        * Awarded to the assassin
+* **CNH**
+    * Capturing a point (1 pt)
+    * Killing enemy near capture point (1 pt)
+    * Capture point held for hold timer (10 pts)
+        * Awarded to all members of the holding team
+* **CTB/OFC** (Carrier is defined as the player who currently holds the briefcase)
+    * Capturing enemy briefcase (10 pts)
+        * Awarded to the Carrier
+    * Defending the Carrier (3 pts)
+        * Killing an enemy while near the Carrier
+    * Harassing the Carrier (3 pts)
+        * Killing a defender while they are near the Carrier
+    * Killing the Carrier (5 pts)
+* **FRD** (Leader is defined as the player volunteered for duty that has not picked up the briefcase yet.  Carrier is defined as the player who has picked up the briefcase.)
+    * Capturing enemy briefcase (10 pts)
+        * Awarded to the Carrier
+    * Defending the Leader/Carrier (3 pts)
+        * Killing an enemy while near the Carrier
+    * Harassing the Leader/Carrier (3 pts)
+        * Killing a defender while they are near the Carrier
+    * Killing the Leader (5 pts)
+    * Killing the Carrier (10 pts)
 ---
 
 ## Notes/Ideas/Improvements
@@ -96,11 +168,11 @@ bring it to target_area_2
 ### Notes
 * ETE did not have a Kevlar Helmet, we would need to add support in the scene files for this item
 * All values with spaces must be surrounded with double quotes, though it's usually just a good idea to do it for all values except for integers
-* Currently there's a pretty bad bug with loading scenarios and the use of `gamemap` -- ETE was designed before `gamemap` functionality was a thing, it relies on the old `map` functionality to load in the scenario.  Using `gamemap` to go to the next map breaks this and scenarios will default to the first one loaded when the server started.
+* Currently there's a pretty bad bug with loading scenarios and the use of `gamemap` -- ETE was designed before `gamemap` functionality was a thing, it relies on the old `map` functionality to load in the scenario.  Using `gamemap` to go to the next map breaks this and scenarios will default to the first one loaded when the server started.  Current q2pro settings to fix this are `sv_allow_map 1`
 
 ### Ideas
 
-### Improvements
+#### Improvements
 * I think scoring could be improved
     * Current ways to score
         * Killing an enemy or enemy Leader
