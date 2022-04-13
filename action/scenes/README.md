@@ -35,35 +35,34 @@
         * `wp_flags` - Weapon loadouts are managed by the scene, not a dmflag
         * `itm_flags` - Item loadouts are managed by the scene, not a dmflag
 ---
-* Espionage cvars and commands
-    * **goals**
-        * Issued by a client when a map is loaded, it will centerprint the goals of the scenario.
-    * **volunteer**
-        * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Simiiar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
-    * **sv scenarios** 
-        * Issued via rcon, this lists the maps and associated scenarios in rotation on the server
-    * **sv goto [scn num]**
-        * Issued via rcon, the argument provided changes to the scene number provided by **sv scenarios** in the event that a map has multiple scenarios and the server admin wants to override the default one loaded
-    * **e_maxVolunteers**
-        * Maximum amount of volunteer per team.  `0` value means there are no restrictions to the amount of volunteers per team.
-    * **e_mustVolunteer**
-        * Requires players to issue the `volunteer` command to begin the match.  If this is set to `0`, players will be chosen at random for the Leader position on new round spawn.
-    * **e_useDefaultScenario**
-        * Settings:
-            * `0` - default to normal teamplay for maps where a scenario can't be found
-            * `1` - use scenario specified in e_defaultScenarioName if a scenario can't be found (default)
-            * `2` - use default scenario for all maps
-            * `3` - use default scenario on maps in action.ini instead of action.scp 
-    * **e_defaultScenarioName**
-        * Used in tandem with **e_useDefaultScenario**, it determines which scenario is used if a map is loaded if no scenes are specified.  See the [original documentation](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/esp6.htm) if this is still unclear.
-    * **e_carrierReturn**
-        * Setting this to `0` means the carrier (the player that currently has the enemy briefcase) cannot touch his own briefcase to return it to base.  Setting this to `1` allows the carrier to return his own briefcase to base.
-    * **e_caseReturnTime**
-        * Setting this to a value in seconds of how much time passes since the briefcase has dropped before it automatically returns to base.  Value if `0` means case does not return automatically.  Suggested values here are `45` to `120` seconds.  Maximum value is `300`.
-    * **allowMPELPSuicide** (optional)
-        * It used to be a popular tactic to suicide by the `kill` command after being shot in the stomach by a sniper to deny the sniper his frag at the expense of your own score.  Setting this to `0` meant the game would deny this action.  Setting it to `1` would randomly allow it (<10% chance?)
-
-
+## Espionage cvars and commands
+* **goals**
+    * Issued by a client when a map is loaded, it will centerprint the goals of the scenario.
+* **volunteer**
+    * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Simiiar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
+* **sv scenarios** 
+    * Issued via rcon, this lists the maps and associated scenarios in rotation on the server
+* **sv goto [scn num]**
+    * Issued via rcon, the argument provided changes to the scene number provided by **sv scenarios** in the event that a map has multiple scenarios and the server admin wants to override the default one loaded
+* **e_maxVolunteers**
+    * Maximum amount of volunteer per team.  `0` value means there are no restrictions to the amount of volunteers per team.
+* **e_mustVolunteer**
+    * Requires players to issue the `volunteer` command to begin the match.  If this is set to `0`, players will be chosen at random for the Leader position on new round spawn.
+* **e_useDefaultScenario**
+    * Settings:
+        * `0` - default to normal teamplay for maps where a scenario can't be found
+        * `1` - use scenario specified in e_defaultScenarioName if a scenario can't be found (default)
+        * `2` - use default scenario for all maps
+        * `3` - use default scenario on maps in action.ini instead of action.scp 
+* **e_defaultScenarioName**
+    * Used in tandem with **e_useDefaultScenario**, it determines which scenario is used if a map is loaded if no scenes are specified.  See the [original documentation](https://assets.aq2world.com/archive/websites/aqdt.fear.net/aqdtdocs/esp6.htm) if this is still unclear.
+* **e_carrierReturn**
+    * Setting this to `0` means the carrier (the player that currently has the enemy briefcase) cannot touch his own briefcase to return it to base.  Setting this to `1` allows the carrier to return his own briefcase to base.
+* **e_caseReturnTime**
+    * Setting this to a value in seconds of how much time passes since the briefcase has dropped before it automatically returns to base.  Value if `0` means case does not return automatically.  Suggested values here are `45` to `120` seconds.  Maximum value is `300`.
+* **allowMPELPSuicide** (optional)
+    * It used to be a popular tactic to suicide by the `kill` command after being shot in the stomach by a sniper to deny the sniper his frag at the expense of your own score.  Setting this to `0` meant the game would deny this action.  Setting it to `1` would randomly allow it (<10% chance?)
+---
 ## Message formatting (`CenterPrintAll`)
 ### Minimum 1 player on each team
 ```
@@ -172,6 +171,8 @@ Points listed here are equivalent to 'frags'
 ### Notes
 * ETE did not have a Kevlar Helmet, we would need to add support in the scene files for this item
 * All values with spaces must be surrounded with double quotes, though it's usually just a good idea to do it for all values except for integers
+* When the Leader dies, the rest of his team also immediately dies with him, ending the round.
+* When the Leader reaches an Escort point (ETV) or delivers the package (FRD), all members of the defending team die immediately.
 * Currently there's a pretty bad bug with loading scenarios and the use of `gamemap` -- ETE was designed before `gamemap` functionality was a thing, it relies on the old `map` functionality to load in the scenario.  Using `gamemap` to go to the next map breaks this and scenarios will default to the first one loaded when the server started.  Current q2pro settings to fix this are `sv_allow_map 1`
 
 ### Ideas
