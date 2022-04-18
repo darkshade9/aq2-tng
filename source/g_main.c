@@ -464,6 +464,9 @@ cvar_t *ltk_showpath;
 cvar_t *ltk_chat;
 cvar_t *ltk_routing;
 #endif
+cvar_t *medkit_drop;
+cvar_t *medkit_time;
+cvar_t *medkit_instant;
 
 cvar_t *jump;			// jumping mod
 
