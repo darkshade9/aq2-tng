@@ -457,6 +457,7 @@ cvar_t *warmup;
 cvar_t *round_begin;
 cvar_t *spectator_hud;
 
+<<<<<<< HEAD
 #ifndef NO_BOTS
 cvar_t *ltk_jumpy;
 cvar_t *ltk_skill;
@@ -464,6 +465,8 @@ cvar_t *ltk_showpath;
 cvar_t *ltk_chat;
 cvar_t *ltk_routing;
 #endif
+=======
+>>>>>>> Replaced ctf_medkit with medkit_drop for issue #107.
 cvar_t *medkit_drop;
 cvar_t *medkit_time;
 cvar_t *medkit_instant;
