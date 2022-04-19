@@ -839,7 +839,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
 			IRC_printf( IRC_T_DEATH, death_msg );
-			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
+			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", v_id, weapmod, locmsg);
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
 				Subtract_Frag( self );
