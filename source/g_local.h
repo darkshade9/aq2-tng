@@ -1900,6 +1900,7 @@ typedef struct
 {
 	char netname[16];
 	char ip[64];
+	char discord_id[20];
 	int enterframe;
 	int disconnect_frame;
 	int score;
