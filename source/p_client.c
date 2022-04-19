@@ -1229,7 +1229,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			break;
 		}	//end of case (mod)
 
-		if (message)
+		if (message || weapmod)
 		{
 			sprintf(death_msg, "%s%s %s%s\n", self->client->pers.netname,
 			message, attacker->client->pers.netname, message2);
