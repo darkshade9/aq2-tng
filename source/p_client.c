@@ -817,10 +817,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
 
-			if (strlen(k_id) > 0)
-				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
-			else
+			if (!message)
 				gi.bprintf(PRINT_STAT, "%s:%s:%s\n", v_id, weapmod, locmsg);
+			else
+				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
