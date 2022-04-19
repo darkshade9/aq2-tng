@@ -1457,7 +1457,7 @@ typedef struct
 
 	ignorelist_t ignorelist;
 
-	char discord_id[20]; // # Discord IDs are 18 characters long, increase this count if that changes
+	char discord_id[20]; // # Discord IDs are 18 characters long, increase this value if that changes
 }
 client_persistant_t;
 
@@ -1733,6 +1733,7 @@ struct gclient_s
 	edict_t		*ctf_grapple;		// entity of grapple
 	int			ctf_grapplestate;		// true if pulling
 	int			ctf_grapplereleaseframe;	// frame of grapple release
+	char		discord_id[20];
 };
 
 
