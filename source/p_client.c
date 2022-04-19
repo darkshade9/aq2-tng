@@ -817,11 +817,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
 
-			if (!message)
-				gi.bprintf(PRINT_STAT, "%s:%s:%s\n", v_id, weapmod, locmsg);
-			else
-				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
-
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
 			{
@@ -844,6 +839,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
 			IRC_printf( IRC_T_DEATH, death_msg );
+			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
 				Subtract_Frag( self );
@@ -1183,6 +1179,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
 			AddKilledPlayer(attacker, self);
+			gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, locmsg);
 
 			if (friendlyFire) {
 				if (!teamplay->value || team_round_going || !ff_afterround->value)
