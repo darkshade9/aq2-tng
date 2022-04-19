@@ -691,8 +691,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 
 	if (attacker == self)
 	{
+		locmsg = "NOLOC";
 		switch (mod) {
-			locmsg = "NOLOC";
 		case MOD_HELD_GRENADE:
 			weapmod = "MOD_HELD_GRENADE";
 			message = "tried to put the pin back in";
@@ -1015,9 +1015,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 						message = " saw the sniper bullet go through her scope thanks to";
 					else
 						message = " saw the sniper bullet go through its scope thanks to";
-				} else
+				} else {
 					locmsg = "LOC_HDAM";
 					message = " caught a sniper bullet between the eyes from";
+				}
 				break;
 			case LOC_CDAM:
 				locmsg = "LOC_CDAM";
