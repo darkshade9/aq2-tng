@@ -660,7 +660,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	char *t_id;
 	char *k_id;    // Stats addition
 	char death_msg[1024];	// enough in all situations? -FB
-	//not needed?  char stats_msg[1024];	// stat tracker max length
 	qboolean friendlyFire;
 	char *special_message = NULL;
 	int n;
@@ -692,8 +691,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	}
 
 
-	if (attacker == self)
-	{
+	if (attacker == self) {
 		locmsg = "NOLOC";
 		switch (mod) {
 		case MOD_HELD_GRENADE:
@@ -817,7 +815,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				self->client->pers.netname, special_message, self->client->attacker->client->pers.netname);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, locmsg );
+			//gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, locmsg);
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
 
@@ -838,11 +836,11 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 
 		}
-		else  // Player killed themselves somehow
+		else  // Player killed themselves somehow, no attacker found
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg );
+			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1195,37 +1193,55 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 			break;
 		case MOD_BLASTER:
+			weapmod = "MOD_BLASTER";
+			locmsg = "NOLOC";
 			message = "was blasted by";
 			break;
 		case MOD_GRENADE:
+			weapmod = "MOD_GRENADE";
+			locmsg = "NOLOC";
 			message = "was popped by";
 			message2 = "'s grenade";
 			break;
 		case MOD_G_SPLASH:
+			weapmod = "MOD_G_SPLASH";
+			locmsg = "NOLOC";
 			message = "was shredded by";
 			message2 = "'s shrapnel";
 			break;
 		case MOD_HYPERBLASTER:
+			weapmod = "MOD_HYPERBLASTER";
+			locmsg = "NOLOC";
 			message = "was melted by";
 			message2 = "'s hyperblaster";
 			break;
 		case MOD_HANDGRENADE:
+			weapmod = "MOD_HANDGRENADE";
+			locmsg = "NOLOC";
 			message = " caught";
 			message2 = "'s handgrenade";
 			break;
 		case MOD_HG_SPLASH:
+			weapmod = "MOD_HG_SPLASH";
+			locmsg = "NOLOC";
 			message = " didn't see";
 			message2 = "'s handgrenade";
 			break;
 		case MOD_HELD_GRENADE:
+			weapmod = "MOD_HELD_GRENADE";
+			locmsg = "NOLOC";
 			message = " feels";
 			message2 = "'s pain";
 			break;
 		case MOD_TELEFRAG:
+			weapmod = "MOD_TELEFRAG";
+			locmsg = "NOLOC";
 			message = " tried to invade";
 			message2 = "'s personal space";
 			break;
 		case MOD_GRAPPLE:
+			weapmod = "MOD_GRAPPLE";
+			locmsg = "NOLOC";
 			message = " was caught by";
 			message2 = "'s grapple";
 			break;
