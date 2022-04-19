@@ -657,8 +657,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	char *message2;
 	char *weapmod = NULL;
 	char *locmsg = NULL;
-	char *t_id;
-	char *k_id;    // Stats addition
+	char *v_id;	   // Victim's ID
+	char *k_id;    // Killer's ID
 	char death_msg[1024];	// enough in all situations? -FB
 	qboolean friendlyFire;
 	char *special_message = NULL;
@@ -675,11 +675,11 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	// If discord_id is empty, the player identifier is the player's netname
 	if (strlen(self->client->pers.discord_id) == 0)
 	{
-		t_id = self->client->pers.netname;
+		v_id = self->client->pers.netname;
 	}
 	else
 	{
-		t_id = self->client->pers.discord_id;
+		v_id = self->client->pers.discord_id;
 	}
 	if (strlen(attacker->client->pers.discord_id) == 0)
 	{
@@ -817,10 +817,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
 
-			if (k_id)
-				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, locmsg);
+			if (strlen(k_id) > 0)
+				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			else
-				gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
+				gi.bprintf(PRINT_STAT, "%s:%s:%s\n", v_id, weapmod, locmsg);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
