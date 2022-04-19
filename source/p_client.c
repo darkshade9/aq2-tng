@@ -655,7 +655,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	int loc;
 	char *message;
 	char *message2;
-	//char *statsmsg;
+	char *statmsg;
 	char *t_id;
 	char *k_id;
 	char death_msg[1024];	// enough in all situations? -FB
@@ -700,7 +700,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message = "tried to put the pin back in";
 			break;
 		case MOD_HG_SPLASH:
-			//statsmsg = "MOD_HG_SPLASH";
+			statmsg = "MOD_HG_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "didn't throw his grenade far enough";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -821,7 +821,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, stat_death, stat_loc );
+			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, statmsg );
 			//gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
