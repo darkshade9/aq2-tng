@@ -671,8 +671,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	loc = locOfDeath;	// useful for location based hits
 	message = NULL;
 	message2 = "";
-	char *stat_death = mod;
-	char *stat_loc	= loc;
 
 	// If discord_id is empty, the player identifier is the player's netname
 	if (strlen(self->client->pers.discord_id) == 0)
