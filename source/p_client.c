@@ -727,17 +727,22 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		}
 	}
 
-	if (!message) {
+	if (!message) 
+	{
+		locmsg = "NOLOC";
 		switch (mod) {
 		case MOD_BREAKINGGLASS:
+			weapmod = "MOD_BREAKINGGLASS";
 			if( self->client->push_timeout > 40 )
 				special_message = "was thrown through a window by";
 			message = "ate too much glass";
 			break;
 		case MOD_SUICIDE:
+			weapmod = "MOD_SUICIDE";
 			message = "is done with the world";
 			break;
 		case MOD_FALLING:
+			weapmod = "MOD_FALLING";
 			if( self->client->push_timeout )
 				special_message = "was taught how to fly by";
 			//message = "hit the ground hard, real hard";
@@ -749,37 +754,49 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "plummets to its death";
 			break;
 		case MOD_CRUSH:
+			weapmod = "MOD_CRUSH";
 			message = "was flattened";
 			break;
 		case MOD_WATER:
+			weapmod = "MOD_WATER";
 			message = "sank like a rock";
 			break;
 		case MOD_SLIME:
+			weapmod = "MOD_SLIME";
 			if( self->client->push_timeout )
 				special_message = "melted thanks to";
 			message = "melted";
 			break;
 		case MOD_LAVA:
+			weapmod = "MOD_LAVA";
 			if( self->client->push_timeout )
 				special_message = "was drop-kicked into the lava by";
 			message = "does a back flip into the lava";
 			break;
 		case MOD_EXPLOSIVE:
+			weapmod = "MOD_EXPLOSIVE";
 		case MOD_BARREL:
+			weapmod = "MOD_BARREL";
 			message = "blew up";
 			break;
 		case MOD_EXIT:
+			weapmod = "MOD_EXIT";
 			message = "found a way out";
 			break;
 		case MOD_TARGET_LASER:
+			weapmod = "MOD_TARGET_LASER";
 			message = "saw the light";
 			break;
 		case MOD_TARGET_BLASTER:
+			weapmod = "MOD_TARGET_BLASTER";
 			message = "got blasted";
 			break;
 		case MOD_BOMB:
+			weapmod = "MOD_BOMB";
 		case MOD_SPLASH:
+			weapmod = "MOD_SPLASH";
 		case MOD_TRIGGER_HURT:
+			weapmod = "MOD_TRIGGER_HURT";
 			if( self->client->push_timeout )
 				special_message = "was shoved off the edge by";
 			message = "was in the wrong place";
