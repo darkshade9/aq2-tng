@@ -815,10 +815,11 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 
 		}
-		else
+		else  // Player killed themselves somehow
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
+			bprintf( 6, "S:%s:%s\n", t_id, statsmsg );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1158,7 +1159,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message, attacker->client->pers.netname, message2);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			sprintf(stats_msg, "%s:%s:%s\n", t_id, statsmsg, k_id);
+			bprintf(6, "%s:%s:%s\n", t_id, statsmsg, k_id);
 
 			AddKilledPlayer(attacker, self);
 
@@ -1185,6 +1186,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
+	sprintf(stats_msg, "%s:%s\n", t_id, statsmsg);
+	Com_LPrintf(PRINT_STAT, stats_msg);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
