@@ -690,13 +690,15 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		k_id = attacker->client->pers.discord_id;
 	}
 
-	if (attacker == self)
-	{
+	if (attacker == self) {
+		locmsg = "NOLOC";
 		switch (mod) {
 		case MOD_HELD_GRENADE:
+			weapmod = "MOD_HELD_GRENADE";
 			message = "tried to put the pin back in";
 			break;
 		case MOD_HG_SPLASH:
+			weapmod = "MOD_HG_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "didn't throw his grenade far enough";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -705,6 +707,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "didn't throw its grenade far enough";
 			break;
 		case MOD_G_SPLASH:
+			weapmod = "MOD_G_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "tripped on his own grenade";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -713,6 +716,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "tripped on its own grenade";
 			break;
 		default:
+			weapmod = "MOD_G_SUICIDE"; // client issues the 'kill' command
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "killed himself";
 			else if (self->client->pers.gender == GENDER_FEMALE)
