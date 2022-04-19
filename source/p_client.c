@@ -819,7 +819,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, message );
+			gi.bprintf( PRINT_STAT, "%s:%s\n", self->client->pers.discord_id, message );
 			//gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
