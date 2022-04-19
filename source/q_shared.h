@@ -202,7 +202,7 @@ typedef enum { qfalse = 0, qtrue } qboolean;
 #define PRINT_MEDIUM                    1	// death messages
 #define PRINT_HIGH                      2	// critical messages
 #define PRINT_CHAT                      3	// chat messages
-
+#define PRINT_STAT                      4 // stat messages
 
 
 #define ERR_FATAL                       0	// exit the entire game with a popup window

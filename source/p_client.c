@@ -659,7 +659,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	char *t_id;
 	char *k_id;
 	char death_msg[1024];	// enough in all situations? -FB
-	char stats_msg[1024];	// stat tracker max length
+	//not needed?  char stats_msg[1024];	// stat tracker max length
 	qboolean friendlyFire;
 	char *special_message = NULL;
 	int n;
@@ -819,7 +819,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			bprintf( 6, "S:%s:%s\n", t_id, statsmsg );
+			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1159,7 +1159,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message, attacker->client->pers.netname, message2);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			bprintf(6, "%s:%s:%s\n", t_id, statsmsg, k_id);
+			gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, mod, k_id);
 
 			AddKilledPlayer(attacker, self);
 
@@ -1186,7 +1186,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
-	bprintf(6, "%s:%s\n", t_id, statsmsg);
+	gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
