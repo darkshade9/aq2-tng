@@ -655,7 +655,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	int loc;
 	char *message;
 	char *message2;
-	char *weapmod, *locmsg, *t_id, *k_id;    // Stats addition
+	char *weapmod;
+	char *locmsg;
+	char *t_id;
+	char *k_id;    // Stats addition
 	char death_msg[1024];	// enough in all situations? -FB
 	//not needed?  char stats_msg[1024];	// stat tracker max length
 	qboolean friendlyFire;
