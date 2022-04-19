@@ -672,6 +672,24 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	message = NULL;
 	message2 = "";
 
+	// If discord_id is empty, the player identifier is the player's netname
+	if (strlen(self->client->pers.discord_id) == 0)
+	{
+		t_id = self->client->pers.netname;
+	}
+	else
+	{
+		t_id = self->client->pers.discord_id;
+	}
+	if (strlen(attacker->client->pers.discord_id) == 0)
+	{
+		k_id = attacker->client->pers.netname;
+	}
+	else
+	{
+		k_id = attacker->client->pers.discord_id;
+	}
+
 	if (attacker == self)
 	{
 		switch (mod) {
