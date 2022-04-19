@@ -814,9 +814,13 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				self->client->pers.netname, special_message, self->client->attacker->client->pers.netname);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
+
+			if (k_id)
+				gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, locmsg);
+			else
+				gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, locmsg);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
