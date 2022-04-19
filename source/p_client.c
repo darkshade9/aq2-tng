@@ -671,6 +671,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	loc = locOfDeath;	// useful for location based hits
 	message = NULL;
 	message2 = "";
+	char *stat_death = mod;
+	char *stat_loc	= loc;
 
 	// If discord_id is empty, the player identifier is the player's netname
 	if (strlen(self->client->pers.discord_id) == 0)
@@ -819,7 +821,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf( PRINT_STAT, "%s:%s\n", self->client->pers.discord_id, message );
+			gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, stat_death, stat_loc );
 			//gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
