@@ -656,7 +656,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	char *message;
 	char *message2;
 	char *statsmsg;
+	char *t_id;
+	char *k_id;
 	char death_msg[1024];	// enough in all situations? -FB
+	char stats_msg[1024];	// stat tracker max length
 	qboolean friendlyFire;
 	char *special_message = NULL;
 	int n;
@@ -669,6 +672,25 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	message = NULL;
 	message2 = "";
 
+	// If discord_id is empty, the player identifier is the player's netname
+	if (strlen(self->client->pers.discord_id) == 0)
+	{
+		t_id = self->client->pers.netname;
+	}
+	else
+	{
+		t_id = self->client->pers.discord_id;
+	}
+	if (strlen(attacker->client->pers.discord_id) == 0)
+	{
+		k_id = attacker->client->pers.netname;
+	}
+	else
+	{
+		k_id = attacker->client->pers.discord_id;
+	}
+
+
 	if (attacker == self)
 	{
 		switch (mod) {
@@ -676,6 +698,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message = "tried to put the pin back in";
 			break;
 		case MOD_HG_SPLASH:
+			statsmsg = "MOD_HG_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "didn't throw his grenade far enough";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -830,7 +853,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				else
 					message = " has a hole in its head from";
 				message2 = "'s Mark 23 pistol";
-				statsmsg = " MK23_SINGLE ";
 				break;
 			case LOC_CDAM:
 				message = " loses a vital chest organ thanks to";
@@ -1136,6 +1158,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message, attacker->client->pers.netname, message2);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
+			sprintf(stats_msg, "%s:%s:%s\n", t_id, statsmsg, k_id);
+
 			AddKilledPlayer(attacker, self);
 
 			if (friendlyFire) {

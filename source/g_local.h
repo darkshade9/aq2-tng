@@ -1456,6 +1456,8 @@ typedef struct
 	int irvision;			// ir on or off (only matters if player has ir device, currently bandolier)
 
 	ignorelist_t ignorelist;
+
+	char discord_id[20]; // # Discord IDs are 18 characters long, increase this count if that changes
 }
 client_persistant_t;
 
