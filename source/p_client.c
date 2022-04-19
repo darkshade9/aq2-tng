@@ -837,8 +837,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, weapmod );
-			//gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
+			gi.bprintf(PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, loc );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1232,7 +1231,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			message, attacker->client->pers.netname, message2);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, mod, k_id);
+			gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, loc);
 
 			AddKilledPlayer(attacker, self);
 
@@ -1259,7 +1258,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
-	gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod);
+	gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, loc);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
