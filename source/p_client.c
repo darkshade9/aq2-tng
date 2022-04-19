@@ -655,9 +655,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	int loc;
 	char *message;
 	char *message2;
-	char *statmsg;
-	char *t_id;
-	char *k_id;
+	char *weapmod, *locmsg, *t_id, *k_id;    // Stats addition
 	char death_msg[1024];	// enough in all situations? -FB
 	//not needed?  char stats_msg[1024];	// stat tracker max length
 	qboolean friendlyFire;
@@ -694,11 +692,13 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	if (attacker == self)
 	{
 		switch (mod) {
+			locmsg = "NOLOC";
 		case MOD_HELD_GRENADE:
+			weapmod = "MOD_HELD_GRENADE";
 			message = "tried to put the pin back in";
 			break;
 		case MOD_HG_SPLASH:
-			statmsg = "MOD_HG_SPLASH";
+			weapmod = "MOD_HG_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "didn't throw his grenade far enough";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -707,6 +707,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "didn't throw its grenade far enough";
 			break;
 		case MOD_G_SPLASH:
+			weapmod = "MOD_G_SPLASH";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "tripped on his own grenade";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -715,6 +716,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "tripped on its own grenade";
 			break;
 		default:
+			weapmod = "MOD_G_DEFAULT";
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "killed himself";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -726,16 +728,20 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	}
 
 	if (!message) {
+		locmsg = "NOLOC";
 		switch (mod) {
 		case MOD_BREAKINGGLASS:
+			weapmod = "MOD_BREAKINGGLASS";
 			if( self->client->push_timeout > 40 )
 				special_message = "was thrown through a window by";
 			message = "ate too much glass";
 			break;
 		case MOD_SUICIDE:
+			weapmod = "MOD_SUICIDE";
 			message = "is done with the world";
 			break;
 		case MOD_FALLING:
+			weapmod = "MOD_FALLING";
 			if( self->client->push_timeout )
 				special_message = "was taught how to fly by";
 			//message = "hit the ground hard, real hard";
@@ -747,37 +753,49 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "plummets to its death";
 			break;
 		case MOD_CRUSH:
+			weapmod = "MOD_CRUSH";
 			message = "was flattened";
 			break;
 		case MOD_WATER:
+			weapmod = "MOD_WATER";
 			message = "sank like a rock";
 			break;
 		case MOD_SLIME:
+			weapmod = "MOD_SLIME";
 			if( self->client->push_timeout )
 				special_message = "melted thanks to";
 			message = "melted";
 			break;
 		case MOD_LAVA:
+			weapmod = "MOD_LAVA";
 			if( self->client->push_timeout )
 				special_message = "was drop-kicked into the lava by";
 			message = "does a back flip into the lava";
 			break;
 		case MOD_EXPLOSIVE:
+			weapmod = "MOD_EXPLOSIVE";
 		case MOD_BARREL:
+			weapmod = "MOD_BARREL";
 			message = "blew up";
 			break;
 		case MOD_EXIT:
+			weapmod = "MOD_EXIT";
 			message = "found a way out";
 			break;
 		case MOD_TARGET_LASER:
+			weapmod = "MOD_TARGET_LASER";
 			message = "saw the light";
 			break;
 		case MOD_TARGET_BLASTER:
+			weapmod = "MOD_TARGET_BLASTER";
 			message = "got blasted";
 			break;
 		case MOD_BOMB:
+			weapmod = "MOD_BOMB";
 		case MOD_SPLASH:
+			weapmod = "MOD_SPLASH";
 		case MOD_TRIGGER_HURT:
+			weapmod = "MOD_TRIGGER_HURT";
 			if( self->client->push_timeout )
 				special_message = "was shoved off the edge by";
 			message = "was in the wrong place";
@@ -819,7 +837,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, statmsg );
+			gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, weapmod );
 			//gi.bprintf( PRINT_STAT, "%s:%s\n", t_id, mod );
 			IRC_printf( IRC_T_DEATH, death_msg );
 
@@ -846,8 +864,10 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	{
 		switch (mod) {
 		case MOD_MK23:	// zucc
+			weapmod = "MOD_MK23";
 			switch (loc) {
 			case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " has a hole in his head from";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -857,10 +877,12 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message2 = "'s Mark 23 pistol";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " loses a vital chest organ thanks to";
 				message2 = "'s Mark 23 pistol";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " loses his lunch to";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -870,29 +892,36 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message2 = "'s .45 caliber pistol round";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				message = " is legless because of";
 				message2 = "'s .45 caliber pistol round";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was shot by";
 				message2 = "'s Mark 23 Pistol";
 			}
 			break;
 		case MOD_MP5:
+			weapmod = "MOD_MP5";
 			switch (loc) {
 			case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				message = "'s brains are on the wall thanks to";
 				message2 = "'s 10mm MP5/10 round";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " feels some chest pain via";
 				message2 = "'s MP5/10 Submachinegun";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				message = " needs some Pepto Bismol after";
 				message2 = "'s 10mm MP5 round";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " had his legs blown off thanks to";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -902,34 +931,43 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message2 = "'s MP5/10 Submachinegun";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was shot by";
 				message2 = "'s MP5/10 Submachinegun";
 			}
 			break;
 		case MOD_M4:
+			weapmod = "MOD_M4";
 			switch (loc) {
 			case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				message = " had a makeover by";
 				message2 = "'s M4 Assault Rifle";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " feels some heart burn thanks to";
 				message2 = "'s M4 Assault Rifle";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				message = " has an upset stomach thanks to";
 				message2 = "'s M4 Assault Rifle";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				message = " is now shorter thanks to";
 				message2 = "'s M4 Assault Rifle";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was shot by";
 				message2 = "'s M4 Assault Rifle";
 			}
 			break;
 		case MOD_M3:
+			weapmod = "MOD_M3";
+			locmsg = "NOLOC";
 			n = rand() % 2 + 1;
 			if (n == 1) {
 				message = " accepts";
@@ -940,31 +978,38 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 			break;
 		case MOD_HC:
+			locmsg = "NOLOC";
 			n = rand() % 2 + 1;
 			if (n == 1) {
 				if (attacker->client->pers.hc_mode)	// AQ2:TNG Deathwatch - Single Barreled HC Death Messages
 				{
+					weapmod = "MOD_HC_SINGLE";
 					message = " underestimated";
 					message2 = "'s single barreled handcannon shot";
 				} else {
+					weapmod = "MOD_HC_DOUBLE";
 					message = " ate";
 					message2 = "'s sawed-off 12 gauge";
 				}
 			} else {
 				if (attacker->client->pers.hc_mode)	// AQ2:TNG Deathwatch - Single Barreled HC Death Messages
 				{
+					weapmod = "MOD_HC_SINGLE";
 					message = " won't be able to pass a metal detector anymore thanks to";
 					message2 = "'s single barreled handcannon shot";
 				} else {
+					weapmod = "MOD_HC_DOUBLE";
 					message = " is full of buckshot from";
 					message2 = "'s sawed off shotgun";
 				}
 			}
 			break;
 		case MOD_SNIPER:
+			weapmod = "MOD_SNIPER";
 			switch (loc) {
 			case LOC_HDAM:
 				if (self->client->ps.fov < 90) {
+					locmsg = "LOC_HDAM_SCOPED";
 					if (self->client->pers.gender == GENDER_MALE)
 						message = " saw the sniper bullet go through his scope thanks to";
 					else if (self->client->pers.gender == GENDER_FEMALE)
@@ -972,48 +1017,61 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 					else
 						message = " saw the sniper bullet go through its scope thanks to";
 				} else
+					locmsg = "LOC_HDAM";
 					message = " caught a sniper bullet between the eyes from";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " was picked off by";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				message = " was sniped in the stomach by";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				message = " was shot in the legs by";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was sniped by";
 				//message2 = "'s Sniper Rifle";
 			}
 			break;
 		case MOD_DUAL:
+			weapmod = "MOD_DUAL";
 			switch (loc) {
 			case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				message = " was trepanned by";
 				message2 = "'s akimbo Mark 23 pistols";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " was John Woo'd by";
 				//message2 = "'s .45 caliber pistol round";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				message = " needs some new kidneys thanks to";
 				message2 = "'s akimbo Mark 23 pistols";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				message = " was shot in the legs by";
 				message2 = "'s akimbo Mark 23 pistols";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was shot by";
 				message2 = "'s pair of Mark 23 Pistols";
 			}
 			break;
 		case MOD_KNIFE:
+			weapmod = "MOD_KNIFE";
 			switch (loc) {
 			case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " had his throat slit by";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -1022,22 +1080,28 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 					message = " had its throat slit by";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = " had open heart surgery, compliments of";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				message = " was gutted by";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				message = " was stabbed repeatedly in the legs by";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was slashed apart by";
 				message2 = "'s Combat Knife";
 			}
 			break;
 		case MOD_KNIFE_THROWN:
+			weapmod = "MOD_KNIFE_THROWN";
 			switch (loc) {
 				case LOC_HDAM:
+				locmsg = "LOC_HDAM";
 				message = " caught";
 				if (self->client->pers.gender == GENDER_MALE)
 					message2 = "'s flying knife with his forehead";
@@ -1047,10 +1111,12 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 					message2 = "'s flying knife with its forehead";
 				break;
 			case LOC_CDAM:
+				locmsg = "LOC_CDAM";
 				message = "'s ribs don't help against";
 				message2 = "'s flying knife";
 				break;
 			case LOC_SDAM:
+				locmsg = "LOC_SDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " sees the contents of his own stomach thanks to";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -1060,6 +1126,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message2 = "'s flying knife";
 				break;
 			case LOC_LDAM:
+				locmsg = "LOC_LDAM";
 				if (self->client->pers.gender == GENDER_MALE)
 					message = " had his legs cut off thanks to";
 				else if (self->client->pers.gender == GENDER_FEMALE)
@@ -1069,11 +1136,14 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message2 = "'s flying knife";
 				break;
 			default:
+				locmsg = "NOLOC";
 				message = " was hit by";
 				message2 = "'s flying Combat Knife";
 			}
 			break;
 		case MOD_KICK:
+			weapmod = "MOD_KICK";
+			locmsg = "NOLOC";
 			n = rand() % 3 + 1;
 			if (n == 1) {
 				if (self->client->pers.gender == GENDER_MALE)
@@ -1107,6 +1177,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 			break;
 		case MOD_PUNCH:
+			weapmod = "MOD_PUNCH";
+			locmsg = "NOLOC";
 			n = rand() % 3 + 1;
 			if (n == 1) {
 				message = " got a free facelift by";
