@@ -655,8 +655,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	int loc;
 	char *message;
 	char *message2;
-	char *weapmod;
-	char *locmsg;
+	char *weapmod = NULL;
+	char *locmsg = NULL;
 	char *t_id;
 	char *k_id;    // Stats addition
 	char death_msg[1024];	// enough in all situations? -FB
