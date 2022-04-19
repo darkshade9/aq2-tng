@@ -719,7 +719,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				message = "tripped on its own grenade";
 			break;
 		default:
-			weapmod = "MOD_G_DEFAULT";
+			weapmod = "MOD_G_SUICIDE"; // client issues the 'kill' command
 			if (self->client->pers.gender == GENDER_MALE)
 				message = "killed himself";
 			else if (self->client->pers.gender == GENDER_FEMALE)
@@ -816,6 +816,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				self->client->pers.netname, special_message, self->client->attacker->client->pers.netname);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
+			gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, loc );
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
 
@@ -1262,7 +1263,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
-	gi.bprintf( PRINT_STAT, "%s:%s:%s\n", t_id, weapmod, loc);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
