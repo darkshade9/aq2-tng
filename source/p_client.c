@@ -730,7 +730,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		}
 	}
 
-	if (!message) {
+	if (!message) 
+	{
 		locmsg = "NOLOC";
 		switch (mod) {
 		case MOD_BREAKINGGLASS:
@@ -1230,7 +1231,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			break;
 		}	//end of case (mod)
 
-		if (message || weapmod)
+		if (message)
 		{
 			sprintf(death_msg, "%s%s %s%s\n", self->client->pers.netname,
 			message, attacker->client->pers.netname, message2);
@@ -1257,7 +1258,11 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 
 			return;
-		}	// if(message)
+		}
+		else
+		{
+			gi.bprintf(PRINT_STAT, "%s:%s:%s:%s\n", t_id, weapmod, k_id, loc);
+		}
 	}
 
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
