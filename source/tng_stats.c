@@ -492,28 +492,11 @@ void Cmd_Statmode_f(edict_t* ent)
 }
 
 // Stats logging add
-#define MAXPRINTMSG     		4096
-#define FS_MODE_APPEND          0x00000000
-#define FS_MODE_READ            0x00000001
-#define FS_MODE_WRITE           0x00000002
-#define FS_FLAG_TEXT            0x00000400
-#define FS_BUF_LINE             0x00000008
-#define FS_BUF_NONE             0x0000000c
-
-typedef int 		qhandle_t;
-
 static bool         com_logNewline;
 static int   		file;
 static int      	com_printEntered;
 static qhandle_t    com_statFile;
 static bool         com_statNewline;
-
-
-size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
-cvar_t  			*statfile_name;
-cvar_t  			*statfile_prefix;
-cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
-cvar_t  			*statfile_flush;     // 1 = flush after each print
 
 static inline int Q_charascii(int c)
 {
@@ -651,4 +634,20 @@ static void statfile_close(void)
 
     FS_FCloseFile(com_statFile);
     com_statFile = 0;
+}
+
+static void statfile_enable_changed(cvar_t *self)
+{
+    statfile_close();
+    if (self->value) {
+        statfile_open();
+    }
+}
+
+static void statfile_param_changed(cvar_t *self)
+{
+    if (statfile_enable->value) {
+        statfile_close();
+        statfile_open();
+    }
 }
