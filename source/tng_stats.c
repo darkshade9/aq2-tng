@@ -498,6 +498,12 @@ static int      	com_printEntered;
 static qhandle_t    com_statFile;
 static bool         com_statNewline;
 
+size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
+cvar_t  			*statfile_name;
+cvar_t  			*statfile_prefix;
+cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
+cvar_t  			*statfile_flush;     // 1 = flush after each print
+
 static inline int Q_charascii(int c)
 {
     if (Q_isspace(c)) {

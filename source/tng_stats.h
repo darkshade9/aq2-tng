@@ -15,6 +15,7 @@ void Cmd_Statmode_f(edict_t *ent);
 #define FS_FLAG_TEXT            0x00000400
 #define FS_BUF_LINE             0x00000008
 #define FS_BUF_NONE             0x0000000c
+#define Q_isprint(c)    ((c) >= 32 && (c) < 127)
 #define Q_isspace(c)    (c == ' ' || c == '\f' || c == '\n' || \
                          c == '\r' || c == '\t' || c == '\v')
 
@@ -25,8 +26,3 @@ qhandle_t FS_EasyOpenFile(char *buf, size_t size, unsigned mode,
 cvar_t *Cvar_Set(const char *var_name, const char *value);
 cvar_t *(*cvar_set)(const char *var_name, const char *value);
 
-size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
-cvar_t  			*statfile_name;
-cvar_t  			*statfile_prefix;
-cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
-cvar_t  			*statfile_flush;     // 1 = flush after each print
