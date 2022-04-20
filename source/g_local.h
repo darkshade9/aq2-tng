@@ -1106,6 +1106,9 @@ extern cvar_t *bholelife;
 // AQ2 ETE
 extern cvar_t *e_enhancedSlippers;
 
+// Stat logger
+extern cvar_t *statfile_name;
+
 #define world   (&g_edicts[0])
 
 // item spawnflags
