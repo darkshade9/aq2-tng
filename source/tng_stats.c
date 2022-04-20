@@ -522,29 +522,6 @@ static inline int Q_charascii(int c)
     return '.'; // don't output control chars, etc
 }
 
-void Com_StatPrintf(const char *fmt)
-{
-    va_list     argptr;
-    char        msg[MAXPRINTMSG];
-    size_t      len;
-
-    // may be entered recursively only once
-    if (com_printEntered >= 2) {
-        return;
-    }
-
-    com_printEntered++;
-
-    va_start(argptr, fmt);
-    len = Q_vscnprintf(msg, sizeof(msg), fmt, argptr);
-    va_end(argptr);
-
-	if (com_statFile) {
-		statfile_write(msg);
-	}
-    com_printEntered--;
-}
-
 static void statfile_open(void)
 {
     char buffer[MAX_OSPATH];
@@ -656,4 +633,27 @@ static void statfile_param_changed(cvar_t *self)
         statfile_close();
         statfile_open();
     }
+}
+
+void Com_StatPrintf(const char *fmt)
+{
+    va_list     argptr;
+    char        msg[MAXPRINTMSG];
+    size_t      len;
+
+    // may be entered recursively only once
+    if (com_printEntered >= 2) {
+        return;
+    }
+
+    com_printEntered++;
+
+    va_start(argptr, fmt);
+    len = Q_vscnprintf(msg, sizeof(msg), fmt, argptr);
+    va_end(argptr);
+
+	if (com_statFile) {
+		statfile_write(msg);
+	}
+    com_printEntered--;
 }
