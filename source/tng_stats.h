@@ -30,3 +30,4 @@ cvar_t *(*cvar_set)(const char *var_name, const char *value);
 
 int 	FS_Write(const void *buffer, size_t len, qhandle_t f);
 int     FS_FCloseFile(qhandle_t f);
+const char *Q_ErrorString(int error);

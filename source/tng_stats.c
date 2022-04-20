@@ -498,8 +498,6 @@ static int      	com_printEntered;
 static qhandle_t    com_statFile;
 static bool         com_statNewline;
 
-int FS_Write(const void *buffer, size_t len, qhandle_t f);
-
 size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
 cvar_t  			*statfile_name;
 cvar_t  			*statfile_prefix;
