@@ -319,6 +319,7 @@
 #include "g_local.h"
 #include "m_player.h"
 #include "cgf_sfx_glass.h"
+#include "tng_stats.h"
 
 
 static void FreeClientEdicts(gclient_t *client)

@@ -515,7 +515,25 @@ cvar_t  			*statfile_prefix;
 cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
 cvar_t  			*statfile_flush;     // 1 = flush after each print
 
-void Com_StatPrintf(const char *fmt, ...)
+static inline int Q_charascii(int c)
+{
+    if (Q_isspace(c)) {
+        // white-space chars are output as-is
+        return c;
+    }
+    c &= 127; // strip high bits
+    if (Q_isprint(c)) {
+        return c;
+    }
+    switch (c) {
+        // handle bold brackets
+        case 16: return '[';
+        case 17: return ']';
+    }
+    return '.'; // don't output control chars, etc
+}
+
+void Com_StatPrintf(const char *fmt)
 {
     va_list     argptr;
     char        msg[MAXPRINTMSG];
@@ -533,7 +551,7 @@ void Com_StatPrintf(const char *fmt, ...)
     va_end(argptr);
 
 	if (com_statFile) {
-		statfile_write(6, msg);
+		statfile_write(msg);
 	}
     com_printEntered--;
 }
