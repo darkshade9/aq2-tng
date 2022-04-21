@@ -661,6 +661,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	char *v_id;
 	char *k_id;    // Stats addition
 	char death_msg[1024];	// enough in all situations? -FB
+	char stats_msg[1024];
 	qboolean friendlyFire;
 	char *special_message = NULL;
 	int n;
@@ -815,9 +816,12 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 				self->client->pers.netname, special_message, self->client->attacker->client->pers.netname);
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
-			Com_StatPrintf("%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			AddKilledPlayer(self->client->attacker, self);
 			self->client->attacker->client->radio_num_kills++;
+
+			// Stats add
+			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			Com_Printf(stats_msg);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
@@ -840,7 +844,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			Com_StatPrintf("%s:%s:%s\n", v_id, weapmod, locmsg);
+			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
+			Com_Printf(stats_msg);
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1254,7 +1259,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
 			AddKilledPlayer(attacker, self);
-			Com_StatPrintf("%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			Com_Printf(stats_msg);
 
 			if (friendlyFire) {
 				if (!teamplay->value || team_round_going || !ff_afterround->value)
@@ -1279,7 +1285,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
-	Com_StatPrintf(PRINT_STAT, "%s:%s\n", v_id, "DIED");
+	sprintf(stats_msg, "%s:%s\n", v_id, "DIED");
+	Com_Printf(stats_msg);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );

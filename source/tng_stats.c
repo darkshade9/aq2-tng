@@ -492,168 +492,171 @@ void Cmd_Statmode_f(edict_t* ent)
 }
 
 // Stats logging add
-static bool         com_logNewline;
-static int   		file;
-static int      	com_printEntered;
-static qhandle_t    com_statFile;
-static bool         com_statNewline;
+// static bool         com_logNewline;
+// static int   		file;
+// static int      	com_printEntered;
+// static qhandle_t    com_statFile;
+// static bool         com_statNewline;
 
-size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
-cvar_t  			*statfile_name;
-cvar_t  			*statfile_prefix;
-cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
-cvar_t  			*statfile_flush;     // 1 = flush after each print
+// int 	FS_Write(const void *buffer, size_t len, qhandle_t f);
+// int     FS_FCloseFile(qhandle_t f);
 
-static inline int Q_charascii(int c)
-{
-    if (Q_isspace(c)) {
-        // white-space chars are output as-is
-        return c;
-    }
-    c &= 127; // strip high bits
-    if (Q_isprint(c)) {
-        return c;
-    }
-    switch (c) {
-        // handle bold brackets
-        case 16: return '[';
-        case 17: return ']';
-    }
-    return '.'; // don't output control chars, etc
-}
+// size_t      		Com_FormatLocalTime(char *buffer, size_t size, const char *fmt);
+// cvar_t  			*statfile_name;
+// cvar_t  			*statfile_prefix;
+// cvar_t  			*statfile_enable;    // 1 = create new, 2 = append to existing
+// cvar_t  			*statfile_flush;     // 1 = flush after each print
 
-static void statfile_open(void)
-{
-    char buffer[MAX_OSPATH];
-    unsigned mode;
-    qhandle_t f;
+// static inline int Q_charascii(int c)
+// {
+//     if (Q_isspace(c)) {
+//         // white-space chars are output as-is
+//         return c;
+//     }
+//     c &= 127; // strip high bits
+//     if (Q_isprint(c)) {
+//         return c;
+//     }
+//     switch (c) {
+//         // handle bold brackets
+//         case 16: return '[';
+//         case 17: return ']';
+//     }
+//     return '.'; // don't output control chars, etc
+// }
 
-    mode = statfile_enable->value > 1 ? FS_MODE_APPEND : FS_MODE_WRITE;
-    if (statfile_flush->value > 0) {
-        if (statfile_flush->value > 1) {
-            mode |= FS_BUF_NONE;
-        } else {
-            mode |= FS_BUF_LINE;
-        }
-    }
+// static void statfile_open(void)
+// {
+//     char buffer[MAX_OSPATH];
+//     unsigned mode;
+//     qhandle_t f;
 
-    f = FS_EasyOpenFile(buffer, sizeof(buffer), mode | FS_FLAG_TEXT,
-                        "stats/", statfile_name->string, ".stats");
-    if (!f) {
-        Cvar_Set("statfile", "0");
-        return;
-    }
+//     mode = statfile_enable->value > 1 ? FS_MODE_APPEND : FS_MODE_WRITE;
+//     if (statfile_flush->value > 0) {
+//         if (statfile_flush->value > 1) {
+//             mode |= FS_BUF_NONE;
+//         } else {
+//             mode |= FS_BUF_LINE;
+//         }
+//     }
 
-    com_statFile = f;
-    com_statNewline = true;
-    Com_Printf("Logging statsfile to %s\n", buffer);
-}
+//     f = FS_EasyOpenFile(buffer, sizeof(buffer), mode | FS_FLAG_TEXT,
+//                         "stats/", statfile_name->string, ".stats");
+//     if (!f) {
+//         Cvar_Set("statfile", "0");
+//         return;
+//     }
 
-static void statfile_write(const char *s)
-{
-    char text[MAXPRINTMSG];
-    char buf[MAX_QPATH];
-    char *p, *maxp;
-    size_t len;
-    int ret;
-    int c;
+//     com_statFile = f;
+//     com_statNewline = true;
+//     Com_Printf("Logging statsfile to %s\n", buffer);
+// }
 
-    if (statfile_prefix->string[0]) {
-        p = strchr(statfile_prefix->string, '@');
-        if (p) {
-			*p = 'S';
-            }
-        }
-        len = Com_FormatLocalTime(buf, sizeof(buf), statfile_prefix->string);
-        if (p) {
-            *p = '@';
-        }
+// static void statfile_write(const char *s)
+// {
+//     char text[MAXPRINTMSG];
+//     char buf[MAX_QPATH];
+//     char *p, *maxp;
+//     size_t len;
+//     int ret;
+//     int c;
 
-    p = text;
-    maxp = text + sizeof(text) - 1;
-    while (*s) {
-        if (com_logNewline) {
-            if (len > 0 && p + len < maxp) {
-                memcpy(p, buf, len);
-                p += len;
-            }
-            com_logNewline = false;
-        }
+//     if (statfile_prefix->string[0]) {
+//         p = strchr(statfile_prefix->string, '@');
+//         if (p) {
+// 			*p = 'S';
+//             }
+//         }
+//         len = Com_FormatLocalTime(buf, sizeof(buf), statfile_prefix->string);
+//         if (p) {
+//             *p = '@';
+//         }
 
-        if (p == maxp) {
-            break;
-        }
+//     p = text;
+//     maxp = text + sizeof(text) - 1;
+//     while (*s) {
+//         if (com_logNewline) {
+//             if (len > 0 && p + len < maxp) {
+//                 memcpy(p, buf, len);
+//                 p += len;
+//             }
+//             com_logNewline = false;
+//         }
 
-        c = *s++;
-        if (c == '\n') {
-            com_logNewline = true;
-        } else {
-            c = Q_charascii(c);
-        }
+//         if (p == maxp) {
+//             break;
+//         }
 
-        *p++ = c;
-    }
-    *p = 0;
+//         c = *s++;
+//         if (c == '\n') {
+//             com_logNewline = true;
+//         } else {
+//             c = Q_charascii(c);
+//         }
 
-    len = p - text;
-    ret = FS_Write(text, len, com_statFile);
-    if (ret != len) {
-        // zero handle BEFORE doing anything else to avoid recursion
-        qhandle_t tmp = com_statFile;
-        com_statFile = 0;
-        FS_FCloseFile(tmp);
-        Com_EPrintf("Couldn't write stats log: %s\n", Q_ErrorString(ret));
-        Cvar_Set("statfile", "0");
-    }
-}
+//         *p++ = c;
+//     }
+//     *p = 0;
 
-static void statfile_close(void)
-{
-    if (!com_statFile) {
-        return;
-    }
+//     len = p - text;
+//     ret = FS_Write(text, len, com_statFile);
+//     if (ret != len) {
+//         // zero handle BEFORE doing anything else to avoid recursion
+//         qhandle_t tmp = com_statFile;
+//         com_statFile = 0;
+//         FS_FCloseFile(tmp);
+//         Com_EPrintf("Couldn't write stats log: %s\n", Q_ErrorString(ret));
+//         Cvar_Set("statfile", "0");
+//     }
+// }
 
-    Com_Printf("Closing stats log.\n");
+// static void statfile_close(void)
+// {
+//     if (!com_statFile) {
+//         return;
+//     }
 
-    FS_FCloseFile(com_statFile);
-    com_statFile = 0;
-}
+//     Com_Printf("Closing stats log.\n");
 
-static void statfile_enable_changed(cvar_t *self)
-{
-    statfile_close();
-    if (self->value) {
-        statfile_open();
-    }
-}
+//     FS_FCloseFile(com_statFile);
+//     com_statFile = 0;
+// }
 
-static void statfile_param_changed(cvar_t *self)
-{
-    if (statfile_enable->value) {
-        statfile_close();
-        statfile_open();
-    }
-}
+// static void statfile_enable_changed(cvar_t *self)
+// {
+//     statfile_close();
+//     if (self->value) {
+//         statfile_open();
+//     }
+// }
 
-void Com_StatPrintf(const char *fmt)
-{
-    va_list     argptr;
-    char        msg[MAXPRINTMSG];
-    size_t      len;
+// static void statfile_param_changed(cvar_t *self)
+// {
+//     if (statfile_enable->value) {
+//         statfile_close();
+//         statfile_open();
+//     }
+// }
 
-    // may be entered recursively only once
-    if (com_printEntered >= 2) {
-        return;
-    }
+// void Com_StatPrintf(const char *fmt)
+// {
+//     va_list     argptr;
+//     char        msg[MAXPRINTMSG];
+//     size_t      len;
 
-    com_printEntered++;
+//     // may be entered recursively only once
+//     if (com_printEntered >= 2) {
+//         return;
+//     }
 
-    va_start(argptr, fmt);
-    len = Q_vscnprintf(msg, sizeof(msg), fmt, argptr);
-    va_end(argptr);
+//     com_printEntered++;
 
-	if (com_statFile) {
-		statfile_write(msg);
-	}
-    com_printEntered--;
-}
+//     va_start(argptr, fmt);
+//     len = Q_vscnprintf(msg, sizeof(msg), fmt, argptr);
+//     va_end(argptr);
+
+// 	if (com_statFile) {
+// 		statfile_write(msg);
+// 	}
+//     com_printEntered--;
+// }
