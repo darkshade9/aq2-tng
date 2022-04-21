@@ -824,9 +824,12 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			self->client->attacker->client->radio_num_kills++;
 
 			// Stats add
-			// THIS ONE IS THE PROBLEM
+			// THIS ONE IS A PROBLEM
 			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			//Com_statPrintf(stats_msg);
+			
+			Com_statPrintf("notself: %s", attacker->client->pers.netname);
+			Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
@@ -1264,6 +1267,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
 			AddKilledPlayer(attacker, self);
+			// THIS ONE IS A PROBLEM
 			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			Com_statPrintf(stats_msg);
 
