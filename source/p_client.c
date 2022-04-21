@@ -1264,8 +1264,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			PrintDeathMessage(death_msg, self);
 			IRC_printf(IRC_T_KILL, death_msg);
 			AddKilledPlayer(attacker, self);
-			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
-			//Com_statPrintf(stats_msg);
+			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			Com_statPrintf(stats_msg);
 
 			if (friendlyFire) {
 				if (!teamplay->value || team_round_going || !ff_afterround->value)
