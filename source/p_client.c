@@ -853,7 +853,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
 			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
-			Com_statPrintf(stats_msg);
+			Com_statPrintf("line 856: %s", stats_msg);
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
@@ -1295,7 +1295,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
 	sprintf(stats_msg, "%s:%s\n", v_id, "DIED");
-	Com_statPrintf(stats_msg);
+	Com_statPrintf("line 1298: %s", stats_msg);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
