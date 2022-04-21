@@ -1289,8 +1289,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
-	//sprintf(stats_msg, "%s:%s\n", v_id, "DIED");
-	//Com_statPrintf(stats_msg);
+	sprintf(stats_msg, "%s:%s\n", v_id, "DIED");
+	Com_statPrintf(stats_msg);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
