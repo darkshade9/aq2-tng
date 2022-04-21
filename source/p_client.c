@@ -824,8 +824,9 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			self->client->attacker->client->radio_num_kills++;
 
 			// Stats add
-			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
-			Com_statPrintf(stats_msg);
+			// THIS ONE IS THE PROBLEM
+			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			//Com_statPrintf(stats_msg);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
@@ -848,8 +849,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
-			//sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
-			//Com_statPrintf(stats_msg);
+			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
+			Com_statPrintf(stats_msg);
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
