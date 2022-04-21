@@ -39,7 +39,7 @@
 * **goals**
     * Issued by a client when a map is loaded, it will centerprint the goals of the scenario.
 * **volunteer**
-    * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Simiiar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
+    * Issued by a client after joining a team, a `volunteer` is chosen for 'special duty' to be the Leader in scenarios that use Leaders (ETV, ATL, FRD).  Players who do not issue the `volunteer` command are not eligible to become the Leader, unless `e_mustVolunteer` is enabled.  Matches that require at least 1 `volunteer` will not begin until that requirement is met.  Similar to how `captains` are issued, but multiple can `volunteer` up until the e_maxVolunteers value.
 * **sv scenarios** 
     * Issued via rcon, this lists the maps and associated scenarios in rotation on the server
 * **sv goto [scn num]**
