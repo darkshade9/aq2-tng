@@ -848,13 +848,15 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			}
 
 		}
-		else  // Player killed themselves somehow, no attacker found
+		else  // Player killed themselves somehow, no attacker found (falling, melting in lava/slime)
 		{
 			sprintf( death_msg, "%s %s\n", self->client->pers.netname, message );
 			PrintDeathMessage( death_msg, self );
 			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
-			//Com_statPrintf("line 856: %s", stats_msg);
-			Com_statPrintf("line 856");
+			Com_statPrintf(stats_msg);
+
+			Com_statPrintf("notself: %s", attacker->client->pers.netname);
+			Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
 
 			IRC_printf( IRC_T_DEATH, death_msg );
 
@@ -1293,11 +1295,12 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		}	// if(message)
 	}
 
+	// Catch-all message if the player died of causes that were not caught in the case statements above
 	sprintf(death_msg, "%s died\n", self->client->pers.netname);
 	PrintDeathMessage(death_msg, self);
 	IRC_printf(IRC_T_DEATH, death_msg);
 	sprintf(stats_msg, "%s:%s\n", v_id, "DIED");
-	Com_statPrintf("line 1298");
+	Com_statPrintf(stats_msg);
 
 	Subtract_Frag(self);	//self->client->resp.score--;
 	Add_Death( self, true );
