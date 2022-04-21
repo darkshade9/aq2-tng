@@ -825,7 +825,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 
 			// Stats add
 			// THIS ONE IS A PROBLEM
-			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
+			sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, self->client->attacker->client->pers.netname, locmsg);
 			//Com_statPrintf(stats_msg);
 			Com_statPrintf(v_id);
 			Com_statPrintf(weapmod);
