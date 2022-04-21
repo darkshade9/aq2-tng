@@ -827,6 +827,11 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			// THIS ONE IS A PROBLEM
 			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			//Com_statPrintf(stats_msg);
+			Com_statPrintf(v_id);
+			Com_statPrintf(weapmod);
+			Com_statPrintf(locmsg);
+			Com_statPrintf(k_id);
+			
 			
 			//Com_statPrintf("notself: %s", attacker->client->pers.netname);
 			//Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
@@ -854,10 +859,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			PrintDeathMessage( death_msg, self );
 			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
 			Com_statPrintf(stats_msg);
-
-			//Com_statPrintf("notself: %s", sizeof(attacker->client->pers.netname));
-			Com_statPrintf("self: %s", sizeof(self->client->attacker->client->pers.netname));
-
 			IRC_printf( IRC_T_DEATH, death_msg );
 
 			if (!teamplay->value || team_round_going || !ff_afterround->value)  {
