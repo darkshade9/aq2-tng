@@ -686,9 +686,9 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 	if (strlen(attacker->client->pers.discord_id) == 0)
 	{
 		// This is a check for if the killer is someone else or yourself (dying in slime or falling)
-		if (strlen(attacker->client->pers.netname > 0))
+		if (strlen(attacker->client->pers.netname) > 0)
 			k_id = attacker->client->pers.netname;
-		else if (strlen(self->client->attacker->client->pers.netname > 0 ))
+		else if (strlen(self->client->attacker->client->pers.netname) > 0 )
 			k_id = self->client->attacker->client->pers.netname;
 	}
 	else
