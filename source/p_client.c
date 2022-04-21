@@ -830,7 +830,6 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			Com_statPrintf(v_id);
 			Com_statPrintf(weapmod);
 			Com_statPrintf(locmsg);
-			Com_statPrintf(k_id);
 			
 			
 			//Com_statPrintf("notself: %s", attacker->client->pers.netname);
