@@ -432,6 +432,8 @@ qboolean Info_Validate (const char *s);
 // this is only here so the functions in q_shared.c and q_shwin.c can link
 void Sys_Error (const char *error, ...);
 void Com_Printf (const char *msg, ...);
+void Com_statPrintf (const char *msg, ...);
+
 
 
 /*
