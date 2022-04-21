@@ -688,7 +688,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 		// This is a check for if the killer is someone else or yourself (dying in slime or falling)
 		if (strlen(attacker->client->pers.netname) > 0)
 			k_id = attacker->client->pers.netname;
-		else if (strlen(self->client->attacker->client->pers.netname) > 0 )
+		else if (strlen(self->client->attacker->client->pers.netname) > 0)
 			k_id = self->client->attacker->client->pers.netname;
 	}
 	else
@@ -828,8 +828,8 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			//sprintf(stats_msg, "%s:%s:%s:%s\n", v_id, weapmod, k_id, locmsg);
 			//Com_statPrintf(stats_msg);
 			
-			Com_statPrintf("notself: %s", attacker->client->pers.netname);
-			Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
+			//Com_statPrintf("notself: %s", attacker->client->pers.netname);
+			//Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
 
 			//MODIFIED FOR FF -FB
 			if (OnSameTeam(self, self->client->attacker))
@@ -856,7 +856,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			Com_statPrintf(stats_msg);
 
 			//Com_statPrintf("notself: %s", attacker->client->pers.netname);
-			Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
+			//Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
 
 			IRC_printf( IRC_T_DEATH, death_msg );
 
