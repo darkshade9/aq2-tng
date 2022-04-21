@@ -855,7 +855,7 @@ void ClientObituary(edict_t * self, edict_t * inflictor, edict_t * attacker)
 			sprintf(stats_msg, "%s:%s:%s\n", v_id, weapmod, locmsg);
 			Com_statPrintf(stats_msg);
 
-			Com_statPrintf("notself: %s", attacker->client->pers.netname);
+			//Com_statPrintf("notself: %s", attacker->client->pers.netname);
 			Com_statPrintf("self: %s", self->client->attacker->client->pers.netname);
 
 			IRC_printf( IRC_T_DEATH, death_msg );
