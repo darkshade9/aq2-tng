@@ -65,5 +65,3 @@ Location (choose one):
 * ASSASSINATE (kill the player defined as the target)
 
 ## Notes and Ideas
-
-* Unlike standard teamplay round-based games, this game type involves continuous play, it only ends when a timelimit, fraglimit or roundlimit is reached.
