@@ -187,6 +187,8 @@ Utilizing `matchmode` in TNG, we can incorporate the enhancements of TNG with Es
 
 
 #### Improvements
+* Scene format
+        * The original scene files were parsed via a lexx interpreter, long before JSON or YAML was a thing.  I think we can improve this by modernizing the file formats, making file ingestion more straightforward and linting when designing scenes more straightforward.
 * Scoring
     * Current ways to score
         * Killing an enemy or enemy Leader
