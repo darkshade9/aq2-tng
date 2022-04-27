@@ -68,7 +68,9 @@ Location (choose one):
 
 ## Notes and Ideas
 
+* Unlike standard teamplay round-based games, this game type involves continuous play, it only ends when a timelimit, fraglimit or roundlimit is reached.
 * Multiple targets can be defined
 * The team only scores if _ALL_ capture points are held by the same team for the interval given
     * Example `GOALS` that would need to be held at once for 60 seconds
     * `HOLDALL "Hondo Arms Hotel" 60 "Lobby" "Room 101" "Room 102" "Room 201" "Room 202" "Roof Top"`
+
