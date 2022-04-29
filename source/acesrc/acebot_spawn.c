@@ -121,7 +121,7 @@ void ACESP_JoinTeam(edict_t *ent, int desired_team)
 void ACESP_LoadBotConfig()
 {
     FILE	*pIn;
-	cvar_t	*game_dir = NULL, *botdir = NULL;
+	cvar_t  *botdir = NULL;
 #ifdef _WIN32
 	int		i;
 #endif
@@ -133,22 +133,17 @@ void ACESP_LoadBotConfig()
 	char	*sp, *tp;
 	int		ttype;
 
-	game_dir = gi.cvar ("game", "", 0);
 	botdir = gi.cvar ("botdir", "bots", 0);
 
 	// Try to load the file for THIS level
 #ifdef	_WIN32
-	i =  sprintf(filename, ".\\");
-	i += sprintf(filename + i, game_dir->string);
-	i += sprintf(filename + i, "\\");
+	i =  sprintf(filename, ".\\action\\");
 	i += sprintf(filename + i, botdir->string);
 	i += sprintf(filename + i, "\\");
 	i += sprintf(filename + i, level.mapname);
 	i += sprintf(filename + i, ".cfg");
 #else
-	strcpy(filename, "./");
-	strcat(filename, game_dir->string);
-	strcat(filename, "/");
+	strcpy(filename, "./action/");;
 	strcat(filename, botdir->string);
 	strcat(filename, "/");
 	strcat(filename, level.mapname);
@@ -159,15 +154,11 @@ void ACESP_LoadBotConfig()
 	if((pIn = fopen(filename, "rb" )) == NULL)
 	{
 #ifdef	_WIN32
-		i =  sprintf(filename, ".\\");
-		i += sprintf(filename + i, game_dir->string);
-		i += sprintf(filename + i, "\\");
+		i =  sprintf(filename, ".\\action\\");
 		i += sprintf(filename + i, botdir->string);
 		i += sprintf(filename + i, "\\botdata.cfg");
 #else
-		strcpy(filename, "./");
-		strcat(filename, game_dir->string);
-		strcat(filename, "/");
+		strcpy(filename, "./action/");
 		strcat(filename, botdir->string);
 		strcat(filename, "/botdata.cfg");
 #endif

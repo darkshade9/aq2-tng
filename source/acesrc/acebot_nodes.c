@@ -1251,23 +1251,16 @@ void ACEND_SaveNodes()
 	char filename[60];
 	int i,j;
 	int version;
-	cvar_t	*game_dir;
 
 	version = LTK_NODEVERSION;
 
-	game_dir = gi.cvar ("game", "", 0);
-
 	//@@ change 'nav' to 'terrain' to line up with William
 #ifdef	_WIN32
-	i =  sprintf(filename, ".\\");
-	i += sprintf(filename + i, game_dir->string);
-	i += sprintf(filename + i, "\\terrain\\");
+	i =  sprintf(filename, ".\\action\\terrain\\");
 	i += sprintf(filename + i, level.mapname);
 	i += sprintf(filename + i, ".ltk");
 #else
-	strcpy(filename, "./");
-	strcat(filename, game_dir->string);
-	strcat(filename, "/terrain/");
+	strcpy(filename, "./action/terrain/");
 	strcat(filename,level.mapname);
 	strcat(filename,".ltk");
 #endif
@@ -1310,20 +1303,13 @@ void ACEND_LoadNodes(void)
 	int i,j;
 	char filename[60];
 	int version;
-	cvar_t	*game_dir;
-
-	game_dir = gi.cvar ("game", "", 0);
 
 #ifdef	_WIN32
-	i =  sprintf(filename, ".\\");
-	i += sprintf(filename + i, game_dir->string);
-	i += sprintf(filename + i, "\\terrain\\");
+	i =  sprintf(filename, ".\\action\\terrain\\");
 	i += sprintf(filename + i, level.mapname);
 	i += sprintf(filename + i, ".ltk");
 #else
-	strcpy(filename, "./");
-	strcat(filename, game_dir->string);
-	strcat(filename, "/terrain/");
+	strcpy(filename, "./action/terrain/");
 	strcat(filename,level.mapname);
 	strcat(filename,".ltk");
 #endif
