@@ -1104,7 +1104,17 @@ extern cvar_t *splatlife;
 extern cvar_t *bholelife;
 
 // AQ2 ETE
+extern cvar_t *use_espionage;
 extern cvar_t *e_enhancedSlippers;
+extern cvar_t *e_maxVolunteers;
+extern cvar_t *e_mustVolunteer;
+extern cvar_t *e_useDefaultScenario;
+extern cvar_t *e_defaultScenarioName;
+extern cvar_t *e_carrierReturn;
+extern cvar_t *e_caseReturnTime;
+extern cvar_t *e_scenarios;
+extern cvar_t *e_goto;
+extern cvar_t *allowMPELPSuicide;
 
 #define world   (&g_edicts[0])
 

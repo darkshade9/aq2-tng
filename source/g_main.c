@@ -460,7 +460,17 @@ cvar_t *spectator_hud;
 cvar_t *jump;			// jumping mod
 
 // AQ2 ETE Add
+cvar_t *use_espionage;
 cvar_t *e_enhancedSlippers;
+cvar_t *e_maxVolunteers;
+cvar_t *e_mustVolunteer;
+cvar_t *e_useDefaultScenario;
+cvar_t *e_defaultScenarioName;
+cvar_t *e_carrierReturn;
+cvar_t *e_caseReturnTime;
+cvar_t *e_scenarios;
+cvar_t *e_goto;
+cvar_t *allowMPELPSuicide;
 
 void SpawnEntities (char *mapname, char *entities, char *spawnpoint);
 void ClientThink (edict_t * ent, usercmd_t * cmd);

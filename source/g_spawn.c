@@ -1040,6 +1040,45 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 			gi.cvar_forceset(teamplay->name, "1");
 		}
 	}
+	else if (use_espionage->value)
+	{
+		gameSettings |= (GS_ROUNDBASED | GS_WEAPONCHOOSE);
+		if (!teamplay->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing teamplay on\n");
+			gi.cvar_forceset(teamplay->name, "1");
+		}
+		// There's no Tourney Espionage -- yet?
+		if (use_tourney->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing Tourney off\n");
+			gi.cvar_forceset(use_tourney->name, "0");
+		}
+		// There's no 3 Team Espionage -- yet?
+		if (use_3teams->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing 3Teams off\n");
+			gi.cvar_forceset(use_3teams->name, "0");
+		}
+		// There's no Matchmode / Tournament Espionage -- yet?
+		if (matchmode->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing Matchmode off\n");
+			gi.cvar_forceset(matchmode->name, "0");
+		}
+		// Espionage has a similar mode (CNH)
+		if (dom->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing Domination off\n");
+			gi.cvar_forceset(dom->name, "0");
+		}
+		// Espionage already has CTB
+		if (ctf->value)
+		{
+			gi.dprintf ("Espionage Enabled - Forcing CTF off\n");
+			gi.cvar_forceset(ctf->name, "0");
+		}
+	}
 	else if (teamplay->value)
 	{
 		gameSettings |= (GS_ROUNDBASED | GS_WEAPONCHOOSE);

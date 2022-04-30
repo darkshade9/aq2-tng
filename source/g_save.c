@@ -541,7 +541,16 @@ void InitGame( void )
 
 	use_mvd2 = gi.cvar( "use_mvd2", "0", 0 );	// JBravo: q2pro MVD2 recording. 0 = off, 1 = on
 
-	e_enhancedSlippers = gi.cvar( "e_enhancedSlippers", "0", 0); // darksaint: AQ2 ETE
+	// darksaint: AQ2 ETE
+	use_espionage = gi.cvar( "use_espionage", "0", CVAR_SERVERINFO | CVAR_LATCH );
+	e_enhancedSlippers = gi.cvar( "e_enhancedSlippers", "0", 0);
+	e_maxVolunteers = gi.cvar( "e_maxVolunteers", "0", 0);
+	e_mustVolunteer = gi.cvar( "e_mustVolunteer", "0", 0);
+	e_useDefaultScenario = gi.cvar( "e_useDefaultScenario", "1", 0);
+	e_defaultScenarioName = gi.cvar( "e_defaultScenarioName", "Assassinate The Leader", 0);
+	e_carrierReturn = gi.cvar( "e_carrierReturn", "1", 0);
+	e_caseReturnTime = gi.cvar( "e_caseReturnTime", "60", 0);
+	allowMPELPSuicide = gi.cvar( "allowMPELPSuicide", "0", 0);
 
 	// items
 	InitItems();
