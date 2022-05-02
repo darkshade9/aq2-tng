@@ -484,7 +484,7 @@ void InitGame( void )
 	use_balancer = gi.cvar( "use_balancer", "0", 0 );
 	dm_choose = gi.cvar( "dm_choose", "0", CVAR_LATCH );
 	dm_shield = gi.cvar( "dm_shield", "0", 0 );
-
+	tourney_lca = gi.cvar( "tourney_lca", "0", 0 );
 	use_punch = gi.cvar( "use_punch", "1", 0 );
 
 	//TNG:Freud - new spawning system
@@ -545,6 +545,11 @@ void InitGame( void )
 	use_mvd2 = gi.cvar( "use_mvd2", "0", 0 );	// JBravo: q2pro MVD2 recording. 0 = off, 1 = on
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	e_enhancedSlippers = gi.cvar( "e_enhancedSlippers", "0", 0); // darksaint: AQ2 ETE
+
+>>>>>>> 2fd2462e45c95ee99a0816692404db8dcd9280c7
 #ifndef NO_BOTS
 	// bots
 	ltk_jumpy = gi.cvar( "ltk_jumpy", "1", CVAR_SERVERINFO );
