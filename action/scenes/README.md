@@ -17,14 +17,15 @@
 
 ## Espionage-specific settings requirements
 
-* `scripts <0|1>` - enables Espionage mode and performs the following:
+* `use_espionage <0|1>` - enables Espionage mode and performs the following (originally `scripts <0/1>`):
     * Enforces:
         * `teamplay 1`
         * `deathmatch 1`
         * `use_3teams 0` - There is no 3 team Espionage support (yet?)
         * `use_tourney 0` - Disables tournament mode (may revisit for Espionage Tournament Edition?)
         * `use_matchmode 0` - Disables matchmode (may revisit for Espionage Tournament Edition?)
-        * `spawnProtect 0` - This would interfere with the continuous play
+        * `ctf 0` - Disables CTF mode
+        * `spawnProtect 0` / `uvtime 0` - This would interfere with the continuous play
     * Requires:
         * `e_maxVolunteers <0|1>` - defaults to 0
         * `e_mustVolunteer <0|1>` - defaults to 0
@@ -179,7 +180,7 @@ Points listed here are equivalent to 'frags'
 
 #### Interactions
 In its final form, Espionage had a Tournament Edition that included Matchplay settings specifically for Espionage.  This was activated by
-* `scripts 1`
+* `scripts 1` (new suggestion: `use_espionage 1`)
 * `matchplay 1`
 Utilizing `matchmode` in TNG, we can incorporate the enhancements of TNG with Espionage to create a similar experience:
     * `captain` players assigning Leaders if they wish
